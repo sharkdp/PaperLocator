@@ -7,6 +7,8 @@ ChangeLog
 - Redirect to website if PDF lookup fails for APS references
 - Add support for small screen sizes, some style fixes
 - Log failed queries which have been redirected to scholar
+- Using https://developers.google.com/closure/compiler/ to generate pl.min.js
+- Performance fixes (smaller files, order of CSS/JS)
 
 130408
 - Firefox extension
