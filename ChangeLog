@@ -4,6 +4,7 @@ ChangeLog
 130420
 - jQuery 2.0.0
 - Support for arXiv version іdentifiers (arXiv:1302.1308v2)
+- Redirect to website if PDF lookup fails for APS references
 
 130408
 - Firefox extension

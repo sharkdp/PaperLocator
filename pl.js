@@ -1,7 +1,7 @@
 $(document).ready(function() {
     $("#submitWebsite").click(journalWebsite);
     $("#submitDocument").click(showDocument);
-    
+
     var $query = $("#query");
     // Register return/enter events
     $query.keypress(function(e) {
@@ -15,8 +15,8 @@ $(document).ready(function() {
     var $hb = $("#helpButton");
     $hb.mouseover(function() { this.src = 'help_blue.png'; });
     $hb.mouseout(function() { this.src = 'help.png'; });
-    $hb.click(function() { $("#help").fadeToggle(); }); 
-    
+    $hb.click(function() { $("#help").fadeToggle(); });
+
     // Do initial lookup, in case back-button has been used
     // and query field is already filled
     lookup();
@@ -42,11 +42,11 @@ function notify(message) {
 function lookup() {
     var query = $("#query").val();
     var res = findRef(query);
-    
+
     if (res && record["journal"] != "" && record["reference"] != "") {
         notify('Found ' + record["journal"] + ' reference:<br><div id="reference">' + record["reference"] + '</div>');
     }
-    
+
     return res;
 }
 
@@ -126,7 +126,7 @@ function findRef(query) {
         record["document"] = 'doAJAX';
         return true;
     }
-    
+
     // Search for Nature references
     if (m = r_nature.exec(query)) {
         var journal = m[1];
@@ -169,9 +169,6 @@ function findRef(query) {
         record["website"] = 'http://iopscience.iop.org/findcontent?CF_JOURNAL=1367-2630&CF_VOLUME=' + volume + '&CF_ISSUE=&CF_PAGE=' + article + '&submit=Go&navsubmit=Go';
         return true;
     }
-    
-    // Search for other '[Mag] Issue, Page' references
-    // TODO
 
     // Found nothing -> Google scholar
     record["website"] = 'http://scholar.google.de/scholar?q=' + encodeURI('"' + query + '"');
@@ -203,6 +200,9 @@ function showDocument() {
                     }
                     $("body, #submitDocument").css("cursor", "default");
                     openURL('http://' + subdomain + '.aps.org' + data);
+                }
+                else {
+                    openURL(record["website"]);
                 }
             }).error(function () {
                 notify('AJAX lookup failed');
