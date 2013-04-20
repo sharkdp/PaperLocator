@@ -3,6 +3,13 @@
     margin-top: 250px;
     padding: 0pt;
     width: 750px;
+    max-width: 80%;
+}
+
+@media (max-height: 600px) {
+    #content {
+        margin-top: 100px;
+    }
 }
 
 #buttons {
@@ -68,6 +75,7 @@ input {
     color: #333;
     border: 1pt solid #ccc;
     background-color: #f4f4f4;
+    border-radius: 2px;
 }
 
 .submit:hover {
@@ -97,7 +105,7 @@ html, body {
 #helpButton {
     position: relative;
     left: 10pt;
-    top: 6pt;
+    top: 7pt;
 }
 
 #help {
