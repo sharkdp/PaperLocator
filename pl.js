@@ -3,11 +3,13 @@ $(document).ready(function() {
     $("#submitDocument").click(showDocument);
     
     var $query = $("#query");
+    // Register return/enter events
     $query.keypress(function(e) {
             if (e.which == 13 || e.keyCode == 13) { showDocument(); }
         });
     $query.keyup(lookup);
-    // Enable middle-click paste.
+
+    // Enable middle-click paste. Use timeout for asynchronous event handling
     $query.mouseup(function() {setTimeout(lookup, 0);});
 
     var $hb = $("#helpButton");
@@ -62,15 +64,14 @@ function findRef(query) {
 
     // Create the RegExp objects locally to reset .lastIndex property
     // see: [http://stackoverflow.com/questions/1520800/why-regexp-with-global-flag-in-javascript-give-wrong-results]
-    
-    
+
     // Match against typical [Issue] [Page] strings, like "11, 222" or "11 222"
     // Numbers in brackets are ignored, e.g. "11 (33) 222"
     var s_issue_and_page = '([0-9]+)(?:[^0-9\\(\\)]+)(?:\\([0-9 ]+\\)(?:[^0-9\\(\\)]+))?([0-9]+)';
 
     var r_doi = new RegExp('\\b(10[.][0-9]{4,}(?:[.][0-9]+)*/(?:(?!["&\'<>])\\S)+)\\b', 'g');
-    var r_arXiv = new RegExp('\\barXiv:([0-9]{4,}\\.[0-9]{4,})\\b', 'ig');
-    var r_arXiv_long = new RegExp('\\barXiv:? *(?:[a-z)]* )? *((?:[a-z-]+)/[0-9]+)\\b', 'ig');
+    var r_arXiv = new RegExp('\\barXiv:([0-9]{4,}\\.[0-9]{4,}(?:v[0-9]+)?)\\b', 'ig');
+    var r_arXiv_old = new RegExp('\\barXiv:? *(?:[a-z)]* )? *((?:[a-z-]+)/[0-9]+(?:v[0-9]+)?)\\b', 'ig');
     var r_aps = new RegExp('(?:P(?:hys)?(?:\\.?|ical) *R(?:ev)?(?:\\.?|iew) *([A-Z]|Lett(?:\\.?|ers?)|) *' + s_issue_and_page + ')\\b', 'ig');
     var r_rmp = new RegExp('R(?:ev)?(?:iew)?\\.? *(?:of)? *M(?:od)?(?:ern)?\\.? *P(?:hys)?(?:ics)?\\.? *' + s_issue_and_page + '\\b', 'ig');
     var r_nature = new RegExp('(?:Nature *(Phys(?:ics)?\\.?)? *(?:\\([^\\)]+\\))? ?' + s_issue_and_page + ')\\b', 'ig');
@@ -79,7 +80,7 @@ function findRef(query) {
 
     var m, res = '';
 
-    // Check for doi
+    // Search for DOI
     if (m = r_doi.exec(query)) {
         record["journal"] = 'DOI';
         record["reference"] = m[1];
@@ -87,8 +88,8 @@ function findRef(query) {
         return true;
     }
 
-    // Check for arXiv ID
-    if ((m = r_arXiv.exec(query)) || (m = r_arXiv_long.exec(query))) {
+    // Search for arXiv ID
+    if ((m = r_arXiv.exec(query)) || (m = r_arXiv_old.exec(query))) {
         var id = m[1].toLowerCase();
         record["journal"] = 'arXiv';
         record["reference"] = 'arXiv:' + id;
@@ -97,7 +98,7 @@ function findRef(query) {
         return true;
     }
 
-    // Check for APS references
+    // Search for APS references
     if (m = r_aps.exec(query)) {
         var journal = m[1];
         var volume = m[2];
@@ -114,7 +115,7 @@ function findRef(query) {
         return true;
     }
 
-    // Check for Rev. Mod. Phys. references
+    // Search for Rev. Mod. Phys. references
     if (m = r_rmp.exec(query)) {
         var volume = m[1];
         var article = m[2];
@@ -126,7 +127,7 @@ function findRef(query) {
         return true;
     }
     
-    // Check for Nature references
+    // Search for Nature references
     if (m = r_nature.exec(query)) {
         var journal = m[1];
         var volume = m[2];
@@ -147,7 +148,7 @@ function findRef(query) {
         return true;
     }
 
-    // Check for Science references
+    // Search for Science references
     if (m = r_science.exec(query)) {
         var volume = m[1];
         var article = m[2];
@@ -158,7 +159,7 @@ function findRef(query) {
         return true;
     }
 
-    // Check for NJP / JP* references
+    // Search for NJP / JP* references
     if (m = r_njp.exec(query)) {
         var volume = m[1];
         var article = m[2];
@@ -169,7 +170,7 @@ function findRef(query) {
         return true;
     }
     
-    // Check for other '[Mag] Issue, Page' references
+    // Search for other '[Mag] Issue, Page' references
     // TODO
 
     // Found nothing -> Google scholar
@@ -218,6 +219,6 @@ function showDocument() {
 }
 
 function openURL(url) {
-    // Use seperate function to maintain chrome extension
+    // Use seperate function to support browser extensions
     location.href = url;
 }
