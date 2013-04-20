@@ -1,0 +1,18 @@
+#content {
+    margin-top: 100px;
+    width: 400px;
+}
+
+#notification {
+    right: 10px;
+    top: 10px;
+}
+
+html, body {
+    min-width: 500px;
+    height: 300px;
+}
+
+#helpButton {
+    display: none;
+}

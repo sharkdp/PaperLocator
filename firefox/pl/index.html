@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+        <title>Paper locator</title>
+        <script type="text/javascript" src="jquery-1.9.1.min.js"></script>
+        <script type="text/javascript" src="pl.js"></script>
+        <script type="text/javascript" src="pl-firefox.js"></script>
+        <link rel="stylesheet" type="text/css" href="pl.css" />
+        <link rel="stylesheet" type="text/css" href="pl-firefox.css" />
+        <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    </head>
+    <body>
+        <div id="notification"></div>
+        <div id="wrapper">
+            <div id="content">
+                <div id="logo"></div>
+                <input type="text" id="query" spellcheck="false" autofocus="autofocus" /> <br />
+                <div id="buttons">
+                    <input type="button" class="submit" value="Journal website" id="submitWebsite" />
+                    <input type="button" class="submit" value="Show document" id="submitDocument" />
+                    <img src="help.png" id="helpButton" alt="Help" />
+                </div>
+            </div>
+            <div id="help">
+                <p><b><span style="color:#06f">Paper</span><span style="color:#04a; font-size: 9pt">locator</span></b> is an easy and universal way to retrieve scientific papers from a given reference or citation.</p>
+                
+                <p>It automates the process of extracting journal, issue and page from the text and searching the journal website manually by redirecting you to the correct page immediately.</p>
+                <ul id="instr">
+                    <li><span style="color:#06f">Paste the piece of text including the reference</span></li>
+                    <li><span style="color:#06f">Press enter or click one of the buttons.</span></li>
+                </ul>
+            
+                <p>
+                    Try one of the following:<br />
+                    <code>[1] R. B. Laughlin, Phys. Rev. Lett. 50, 1395 (1983).<br />prl 17 1133<br />arXiv:quant-ph/9707021<br />lained in Nature Physics 1, 23 by Imm</code>
+                </p>
+
+                <p>
+                    <b>Supported references (<i>so far</i>):</b> Nature (Physics), Science, PRA-PRX, Phys. Rev. Lett, Rev. Mod. Phys, New Journal of Physics, Digital object identifiers (DOI), arXiv
+                </p>	
+            </div>
+        </div>
+        <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-39945208-1', 'david-peter.de');ga('send', 'pageview');</script>
+        <input type="hidden" id="ffClosePanel" />
+    </body>
+</html>

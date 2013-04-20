@@ -1,0 +1,15 @@
+ChangeLog
+=========
+
+130408
+- Firefox extension
+
+130407
+- "everything jQuery"
+- direct access to PDFs for APS references (AJAX magic)
+- notifications if reference has been found
+- improved responsiveness (search-as-you-type)
+- better event handling
+- allow brackets between issue and page, e.g. "Phys. Rev. Lett. 45 (7), 566"
+- Chrome browser extension
+- New logo

@@ -1,0 +1,17 @@
+{
+  "manifest_version": 2,
+
+  "name": "Paper locator",
+  "description": "Paper locator is an easy and universal way to retrieve scientific papers from a given reference or citation.",
+  "version": "0.3.1",
+
+  "permissions": ["tabs", "http://david-peter.de/pl/"],
+  "icons": { "48": "icon_48.png",
+            "128": "icon_128.png"},
+
+  "browser_action": {
+    "default_icon": "favicon.png",
+    "default_popup": "index.html"
+  }
+}
+
