@@ -170,8 +170,8 @@ function findRef(query) {
         return true;
     }
 
-    // Found nothing -> Google scholar
-    record["website"] = 'http://scholar.google.de/scholar?q=' + encodeURI('"' + query + '"');
+    // Found nothing -> redirect to Google scholar
+    record["website"] = 'http://david-peter.de/pl/redirect.php?q=' + encodeURI(query);
     return false;
 
 }
