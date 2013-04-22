@@ -12,15 +12,24 @@ $(document).ready(function() {
     // Enable middle-click paste. Use timeout for asynchronous event handling
     $query.mouseup(function() {setTimeout(lookup, 0);});
 
-    var $hb = $("#helpButton");
-    $hb.mouseover(function() { this.src = 'help_blue.png'; });
-    $hb.mouseout(function() { this.src = 'help.png'; });
-    $hb.click(function() { $("#help").fadeToggle(); });
+    // Enable footer buttons 
+    $("#helpButton"      ).click(function() { toggleInfoBox("#help"); });
+    $("#extensionsButton").click(function() { toggleInfoBox("#extensions"); });
 
     // Do initial lookup, in case back-button has been used
     // and query field is already filled
     lookup();
+    
+    // TODO: remove
+    $('img.imgbutton').hover(function() {
+        var src = $(this).attr('src');
+        $(this).attr('src', (src.indexOf("-on") == -1) ? src.replace(/.png/, "-on.png") : src.replace(/-on/, ""));
+        })
+        .each(function() {
+            $('<img />').attr('src', $(this).attr('src').replace(".png", "-on.png"));
+        });
 });
+
 
 var record = {journal: '', reference: '', website: '', document: ''};
 var lastMessage = "";
@@ -36,6 +45,24 @@ function notify(message) {
     if (!notificationOn) {
         notificationOn = true;
         $div.slideToggle().delay(3000).slideToggle({complete: function() {notificationOn = false;}});
+    }
+}
+
+function toggleInfoBox(id) {
+    var $id = $(id);
+    if ($id.is(":visible")) {
+        $id.slideUp();
+    }
+    else {
+        var $box = $("div.infobox:visible");
+        if ($box.length > 0) {
+            $box.slideUp(400, function () {
+                $id.slideDown();
+            });
+        }
+        else {
+            $id.slideDown();
+        }
     }
 }
 

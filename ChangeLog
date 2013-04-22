@@ -1,24 +1,28 @@
 ChangeLog
 =========
 
+130422
+* New footer toolbar for help, browser extensions, GitHub and feedback
+
 130420
-- jQuery 2.0.0
-- Support for arXiv version іdentifiers (arXiv:1302.1308v2)
-- Redirect to website if PDF lookup fails for APS references
-- Add support for small screen sizes, some style fixes
-- Log failed queries which have been redirected to scholar
-- Using https://developers.google.com/closure/compiler/ to generate pl.min.js
-- Performance fixes (smaller files, order of CSS/JS)
+* jQuery 2.0.0
+* Support for arXiv version identifiers (arXiv:1302.1308v2)
+* Redirect to website if PDF lookup fails for APS references
+* Add support for small screen sizes, some style fixes
+* Log failed queries which have been redirected to scholar
+* Performance fixes (smaller files, order of CSS/JS)
+	- Using https://developers.google.com/closure/compiler/ to generate pl.min.js
+	- Use optipng on pl.png
 
 130408
-- Firefox extension
+* Firefox extension
 
 130407
-- "everything jQuery"
-- direct access to PDFs for APS references (AJAX magic)
-- notifications if reference has been found
-- improved responsiveness (search-as-you-type)
-- better event handling
-- allow brackets between issue and page, e.g. "Phys. Rev. Lett. 45 (7), 566"
-- Chrome browser extension
-- New logo
+* "everything jQuery"
+* direct access to PDFs for APS references (AJAX magic)
+* notifications if reference has been found
+* improved responsiveness (search-as-you-type)
+* better event handling
+* allow brackets between issue and page, e.g. "Phys. Rev. Lett. 45 (7), 566"
+* Chrome browser extension
+* New logo
