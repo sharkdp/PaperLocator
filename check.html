@@ -1,7 +1,9 @@
-<script type="text/javascript" src="jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="jquery-2.0.0.min.js"></script>
 <script type="text/javascript" src="pl.js"></script>
 <script type="text/javascript">
 var testSearches = [
+'D Peter et al 2012 J. Phys. B: At. Mol. Opt. Phys. 45 225302',
+'2] J. M. Vogels et al. Phys. Rev. Lett., 88:60402, 2008.',
 'prl 17 1133',
 'Eur. Phys. J. D 4, 261 ',
 'Sov. Phys. JETP 29, 1107',
@@ -146,15 +148,17 @@ var testSearches = [
 ];
 
 var res;
-var showAll = false;
+var showAll = true;
+//var showAll = false;
 
 $.each(testSearches, function(i, ref) {
     res = findRef(ref);
     if (showAll || !res) {
-        document.write('<b>' + ref + '</b><br><code>');
+        col = (res) ? 'green' : 'red';
+        document.write('<b style="color:' + col + '">' + ref + '</b><br><code>');
         document.write('Journal:   ' + record['journal'] + '<br>');
         document.write('Reference: ' + record['reference'] + '<br>');
-        document.write('Website:   ' + record['website'] + '<br>');
+        document.write('Website:   <a href="' + record['website'] + '">' + record['website'] + '</a><br>');
         document.write('Document:  ' + record['document'] + '<br>');
         document.write('</code><br><br>');
     }
