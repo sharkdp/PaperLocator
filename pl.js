@@ -15,19 +15,14 @@ $(document).ready(function() {
     // Enable footer buttons 
     $("#helpButton"      ).click(function() { toggleInfoBox("#help"); });
     $("#extensionsButton").click(function() { toggleInfoBox("#extensions"); });
+    $("#githubButton"    ).click(function() { toggleInfoBox("#github"); });
+    $("#feedbackButton, #messageLink").click(function() { toggleInfoBox("#feedback"); });
+
+    $("#feedbackSubmit"  ).click(function() { sendFeedback(); });
 
     // Do initial lookup, in case back-button has been used
     // and query field is already filled
     lookup();
-    
-    // TODO: remove
-    $('img.imgbutton').hover(function() {
-        var src = $(this).attr('src');
-        $(this).attr('src', (src.indexOf("-on") == -1) ? src.replace(/.png/, "-on.png") : src.replace(/-on/, ""));
-        })
-        .each(function() {
-            $('<img />').attr('src', $(this).attr('src').replace(".png", "-on.png"));
-        });
 });
 
 
@@ -64,6 +59,25 @@ function toggleInfoBox(id) {
             $id.slideDown();
         }
     }
+}
+
+function sendFeedback() {
+    $("body, #submitDocument").css("cursor", "progress");
+    $.ajax({
+        url: 'http://david-peter.de/pl/feedback.php',
+        data: {
+            name: $("#feedbackName").val(),
+            email: $("#feedbackEmail").val(),
+            message: $("#feedbackMessage").val()
+        },
+        type: 'POST'
+    }).success(function(data) {
+        $("#feedback").html('<p class="instr">Feedback sent</p><p>Thank you!</p>');
+        $("body, #submitDocument").css("cursor", "default");
+    }).error(function () {
+        notify('Sending feedback failed');
+        $("body, #submitDocument").css("cursor", "default");
+    });
 }
 
 function lookup() {

@@ -17,19 +17,19 @@
     padding-bottom: 40px;
 }
 
-@media (max-height: 800px) {
+@media (max-height: 850px) {
     #content {
         margin-top: 150px;
     }
 }
 
-@media (max-height: 700px) {
+@media (max-height: 750px) {
     #content {
         margin-top: 100px;
     }
 }
 
-@media (max-height: 600px) {
+@media (max-height: 700px) {
     #content {
         margin-top: 60px;
     }
@@ -125,7 +125,7 @@ html, body {
     font-size: 11pt;
     margin: 0 auto;
     padding: 10pt;
-    width: 380px;
+    width: 420px;
     height: 100%;
     background: #fff;
     border: 1pt solid #ccc;
@@ -136,19 +136,68 @@ html, body {
     text-align: left;
 }
 
+.infobox a {
+    color: #06f;
+    text-decoration: none;
+}
+
+.infobox a:hover {
+    color: #05d;
+    text-decoration: underline;
+}
+
+.infobox img {
+    float: right;
+    margin: 10px;
+    margin-top: 16px;
+}
+
+.infobox form {
+    margin-top: 30px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+.infobox input.text, .infobox textarea {
+    width: 250px;
+    border: 1pt solid #777;
+    margin: 3px;
+    padding: 3px;
+    font-family: Arial, sans-serif;
+    font-size: 10pt;
+    background: #fff;
+}
+
+.infobox textarea {
+    height: 80px;
+}
+
+#feedbackSubmit {
+    width: 130px;
+    margin: 3px;
+    padding: 2px;
+    background-color: #eee;
+}
+
+
 .supported {
-    font-size: 9pt;
+    font-size: 8pt;
 }
 
 .instr {
     margin-top: 10pt;
     margin-bottom: 10pt;
-    font-size: 12pt;
-    padding-left: 5px;
+    font-size: 14pt;
+    padding-left: 28px;
     font-weight: bold;
+    color: #05d;
+    background-image: url(graphics/arrow.png);
+    background-repeat: no-repeat;
 }
 
-code {
+pre {
+    border-left: 2pt solid #ccc;
+    padding-left: 5px;
     font-size: 9pt;
     color: #666;
     line-height: 13pt;

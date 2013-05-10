@@ -2,7 +2,8 @@ ChangeLog
 =========
 
 130422
-* New footer toolbar for help, browser extensions, GitHub and feedback
+* New footer toolbar for help, browser extensions, development and feedback
+* Feedback form
 
 130420
 * jQuery 2.0.0
