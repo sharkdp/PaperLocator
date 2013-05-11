@@ -17,7 +17,7 @@
    inkscape:export-filename="/home/shark/pl/graphics/arrow.png"
    inkscape:export-xdpi="21"
    inkscape:export-ydpi="21"
-   sodipodi:docname="Neues Dokument 10">
+   sodipodi:docname="arrow.svg">
   <defs
      id="defs3295" />
   <sodipodi:namedview
@@ -28,7 +28,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.88406655"
-     inkscape:cx="109.33153"
+     inkscape:cx="32.979812"
      inkscape:cy="-17.151872"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -50,7 +50,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -64,7 +64,7 @@
        inkscape:connector-curvature="0"
        id="path3965"
        d="m 396.80933,537.38391 0,15.37503 c -55.51699,0.81107 -78.31816,-1.62867 -51.72405,-36.44476 -35.46635,36.17508 -10.10868,66.2222 51.72405,62.55765 l 0,15.37499 34.51205,-28.43144 z"
-       style="fill:#0066ff;fill-opacity:0.70588235;stroke:none"
+       style="fill:#0066ff;fill-opacity:1;stroke:none"
        inkscape:export-xdpi="21"
        inkscape:export-ydpi="21" />
   </g>

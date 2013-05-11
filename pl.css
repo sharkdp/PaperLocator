@@ -11,7 +11,7 @@
 #content {
     margin: 0 auto;
     margin-top: 250px;
-    padding: 0pt;
+    padding: 0;
     width: 750px;
     max-width: 80%;
     padding-bottom: 40px;
@@ -36,14 +36,14 @@
 }
 
 #buttons {
-    margin-top: 10pt;
+    margin-top: 13px;
     margin-bottom: 50px;
     text-align: center;
 }
 
 input {
     font-size: 13pt;
-    margin: 0pt;
+    margin: 0;
 }
 
 #notification {
@@ -53,7 +53,7 @@ input {
     top: 50px;
     width: 250px;
     height: 46px;
-    padding: 10pt;
+    padding: 10px;
     background-color: #333;
     color: white;
     border: 1pt solid #000;
@@ -78,8 +78,8 @@ input {
 #query {
     border: 1pt solid #06f;
     width: 100%;
-    padding: 3pt;
-    padding-left: 5pt;
+    padding: 4px;
+    padding-left: 6px;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -96,9 +96,9 @@ input {
     font-size: 9pt;
     font-weight: bold;
 
-    padding: 5pt;
-    margin-right: 5pt;
-    margin-left: 5pt;
+    padding: 7px;
+    margin-right: 6px;
+    margin-left: 6px;
     color: #333;
     border: 1pt solid #ccc;
     background-color: #f8f8f8;
@@ -124,7 +124,7 @@ html, body {
     display: none;
     font-size: 11pt;
     margin: 0 auto;
-    padding: 10pt;
+    padding: 15px;
     width: 420px;
     height: 100%;
     background: #fff;
@@ -148,8 +148,9 @@ html, body {
 
 .infobox img {
     float: right;
-    margin: 10px;
-    margin-top: 16px;
+    margin-left: 10px;
+    margin-top: 3px;
+    margin-right: 0;
 }
 
 .infobox form {
@@ -182,15 +183,16 @@ html, body {
 
 .supported {
     font-size: 8pt;
+    margin-bottom: 0;
 }
 
 .instr {
-    margin-top: 10pt;
-    margin-bottom: 10pt;
-    font-size: 14pt;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 19px;
     padding-left: 28px;
     font-weight: bold;
-    color: #05d;
+    color: #06f;
     background-image: url(graphics/arrow.png);
     background-repeat: no-repeat;
 }
@@ -206,7 +208,7 @@ pre {
 p {
     padding: 0;
     margin: 0;
-    margin-bottom: 8pt;
+    margin-bottom: 8px;
     text-align: justify;
 }
 
@@ -220,6 +222,7 @@ p {
     background: #fff;
     border-top: 1pt solid #ccc;
     text-align: center;
+    font-weight: bold;
 }
 
 #footer div {
@@ -237,5 +240,4 @@ p {
     color: #fff;
     outline-top: 1pt solid #06f;
 }
-
 

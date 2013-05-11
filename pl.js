@@ -18,7 +18,13 @@ $(document).ready(function() {
     $("#githubButton"    ).click(function() { toggleInfoBox("#github"); });
     $("#feedbackButton, #messageLink").click(function() { toggleInfoBox("#feedback"); });
 
+    // Feedback form
     $("#feedbackSubmit"  ).click(function() { sendFeedback(); });
+
+    // Show help infobox if hash #intro is set
+    if (window.location.hash == '#intro') {
+        $("#help").delay(500).slideDown();
+    }
 
     // Do initial lookup, in case back-button has been used
     // and query field is already filled
