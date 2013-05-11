@@ -3,13 +3,9 @@ Paper locator
 
 http://david-peter.de/pl
 
-Paper locator is an easy and universal way to retrieve scientific papers from a given reference or citation.
+Paper locator is an easy and universal interface to get immediate access to scientific papers.
 
-It automates the process of extracting journal, issue and page from the text and searching the journal website manually by redirecting you to the correct page immediately.
-
-- Paste the piece of text including the reference
-- Press enter or click one of the buttons
-
+Tired of manually extracting journal, volume and page from a reference and searching the publisher websites manually? Paper locator automates this process. Just copy a text sample containing the reference and select if you want to see the abstract (journal website) or the document directly (press enter).
 
 Try one of the following:
   [1] R. B. Laughlin, Phys. Rev. Lett. 50, 1395 (1983).

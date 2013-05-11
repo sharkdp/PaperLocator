@@ -12,15 +12,25 @@ $(document).ready(function() {
     // Enable middle-click paste. Use timeout for asynchronous event handling
     $query.mouseup(function() {setTimeout(lookup, 0);});
 
-    var $hb = $("#helpButton");
-    $hb.mouseover(function() { this.src = 'help_blue.png'; });
-    $hb.mouseout(function() { this.src = 'help.png'; });
-    $hb.click(function() { $("#help").fadeToggle(); });
+    // Enable footer buttons 
+    $("#helpButton"      ).click(function() { toggleInfoBox("#help"); });
+    $("#extensionsButton").click(function() { toggleInfoBox("#extensions"); });
+    $("#githubButton"    ).click(function() { toggleInfoBox("#github"); });
+    $("#feedbackButton, #messageLink").click(function() { toggleInfoBox("#feedback"); });
+
+    // Feedback form
+    $("#feedbackSubmit"  ).click(function() { sendFeedback(); });
+
+    // Show help infobox if hash #intro is set
+    if (window.location.hash == '#intro') {
+        $("#help").delay(500).slideDown();
+    }
 
     // Do initial lookup, in case back-button has been used
     // and query field is already filled
     lookup();
 });
+
 
 var record = {journal: '', reference: '', website: '', document: ''};
 var lastMessage = "";
@@ -37,6 +47,43 @@ function notify(message) {
         notificationOn = true;
         $div.slideToggle().delay(3000).slideToggle({complete: function() {notificationOn = false;}});
     }
+}
+
+function toggleInfoBox(id) {
+    var $id = $(id);
+    if ($id.is(":visible")) {
+        $id.slideUp();
+    }
+    else {
+        var $box = $("div.infobox:visible");
+        if ($box.length > 0) {
+            $box.slideUp(400, function () {
+                $id.slideDown();
+            });
+        }
+        else {
+            $id.slideDown();
+        }
+    }
+}
+
+function sendFeedback() {
+    $("body, #submitDocument").css("cursor", "progress");
+    $.ajax({
+        url: 'http://david-peter.de/pl/feedback.php',
+        data: {
+            name: $("#feedbackName").val(),
+            email: $("#feedbackEmail").val(),
+            message: $("#feedbackMessage").val()
+        },
+        type: 'POST'
+    }).success(function(data) {
+        $("#feedback").html('<p class="instr">Feedback sent</p><p>Thank you!</p>');
+        $("body, #submitDocument").css("cursor", "default");
+    }).error(function () {
+        notify('Sending feedback failed');
+        $("body, #submitDocument").css("cursor", "default");
+    });
 }
 
 function lookup() {
