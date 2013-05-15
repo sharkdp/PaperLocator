@@ -171,6 +171,7 @@ html, body {
 
 .infobox textarea {
     height: 80px;
+    max-width: 360px;
 }
 
 #feedbackSubmit {
