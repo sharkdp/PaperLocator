@@ -70,7 +70,7 @@ function toggleInfoBox(id) {
 function sendFeedback() {
     $("body, #submitDocument").css("cursor", "progress");
     $.ajax({
-        url: 'http://david-peter.de/pl/feedback.php',
+        url: 'http://paperlocator.com/feedback.php',
         data: {
             name: $("#feedbackName").val(),
             email: $("#feedbackEmail").val(),
@@ -280,7 +280,7 @@ function findRef(query) {
     }
 
     // Found nothing -> redirect to Google scholar
-    record["website"] = 'http://david-peter.de/pl/redirect.php?q=' + encodeURI(query);
+    record["website"] = 'http://paperlocator.com/redirect.php?q=' + encodeURI(query);
     return false;
 
 }
@@ -297,7 +297,7 @@ function showDocument() {
             // Lookup PDF URL for APS references
             $("body, #submitDocument").css("cursor", "progress");
             $.ajax({
-                url: 'http://david-peter.de/pl/aps_lookup.php',
+                url: 'http://paperlocator.com/aps_lookup.php',
                 data: {url: encodeURI(record["website"])},
                 type: 'GET'
             }).success(function(data) {
