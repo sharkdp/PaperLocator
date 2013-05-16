@@ -121,7 +121,7 @@ function findRef(query) {
     var r_arXiv_old = new RegExp('\\barXiv:? *(?:[a-z)]* )? *((?:[a-z-]+)/[0-9]+(?:v[0-9]+)?)\\b', 'ig');
     var r_aps = new RegExp('\\b(?:P(?:hys)?(?:\\.?|ical) *R(?:ev)?(?:\\.?|iew) *([A-Z]|Lett(?:\\.?|ers?)|)' + s_issue_and_page + ')\\b', 'ig');
     var r_rmp = new RegExp('\\bR(?:ev)?(?:iew)?s?\\.? *(?:of)? *M(?:od)?(?:ern)?\\.? *P(?:hys)?(?:ics)?\\.?' + s_issue_and_page + '\\b', 'ig');
-    var r_nature = new RegExp('\\b(?:Nature *(Phys(?:ics)?\\.?)? *(?:\\([^\\)]+\\))?' + s_issue_and_page + ')\\b', 'ig');
+    var r_nature = new RegExp('\\b(?:Nat(?:ure)?\\.? *(Phys(?:ics)?\\.?)? *(?:\\([^\\)]+\\))?' + s_issue_and_page + ')\\b', 'ig');
     var r_science = new RegExp('\\b(?:Science *(?:\\([^\\)]+\\))?' + s_issue_and_page + ')\\b', 'ig');
     var r_jphys = new RegExp('\\bJ(?:ournal)?\\.? *(?:of)? *P(?:hys)?(?:ics)?[ \\.:]*([ABDG]|C(?:ond(?:ens(?:ed)?)?)[ \\.]*(?:Mat(?:ter)))[^a-z][^0-9]*' + s_issue_and_page + '\\b', 'ig');
     var r_njp = new RegExp('\\b(N)(?:ew)?\\.? *J(?:ournal)?\\.? *(?:of)? *P(?:hys)?(?:ics)?\\.?' + s_issue_and_page + '\\b', 'ig');
