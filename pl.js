@@ -4,8 +4,15 @@ $(document).ready(function() {
 
     var $query = $("#query");
     // Register return/enter events
-    $query.keypress(function(e) {
-            if (e.which == 13 || e.keyCode == 13) { showDocument(); }
+    $query.keydown(function(e) {
+            if (e.which == 13 || e.keyCode == 13) {
+                if (e.ctrlKey) { // ctrl + enter
+                    journalWebsite();
+                }
+                else { // enter
+                    showDocument();
+                }
+            }
         });
     $query.keyup(lookup);
 
