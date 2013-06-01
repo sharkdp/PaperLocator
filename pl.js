@@ -98,7 +98,7 @@ function lookup() {
     var res = findRef(query);
 
     if (res && record["journal"] != "" && record["reference"] != "") {
-        notify('Found ' + record["journal"] + ' reference:<br><div id="reference">' + record["reference"] + '</div>');
+        notify('Detected <i>' + record["journal"] + '</i> reference:<br><div id="reference">' + record["reference"] + '</div>');
     }
 
     return res;
@@ -121,7 +121,7 @@ function findRef(query) {
 
     // Match against typical [Issue] [Page] strings, like "11, 222" or "11 222"
     // Numbers in brackets are ignored, e.g. "11 (33) 222"
-    var s_issue_and_page = '[^0-9a-z]*([0-9]+)(?:[^0-9\\(\\)]+)(?:\\([0-9 ]+\\)(?:[^0-9\\(\\)]+))?([0-9]+)';
+    var s_issue_and_page = '[^0-9a-z]+[^0-9]*([0-9]+)(?:[^0-9\\(\\)]+)(?:\\([0-9 ]+\\)(?:[^0-9\\(\\)]+))?([0-9]+)';
 
     var r_doi = new RegExp('\\b(10[.][0-9]{4,}(?:[.][0-9]+)*/(?:(?!["&\'<>])\\S)+)\\b', 'g');
     var r_arXiv = new RegExp('\\barXiv:([0-9]{4,}\\.[0-9]{4,}(?:v[0-9]+)?)\\b', 'ig');
@@ -130,7 +130,7 @@ function findRef(query) {
     var r_rmp = new RegExp('\\bR(?:ev)?(?:iew)?s?\\.? *(?:of)? *M(?:od)?(?:ern)?\\.? *P(?:hys)?(?:ics)?\\.?' + s_issue_and_page + '\\b', 'ig');
     var r_nature = new RegExp('\\b(?:Nat(?:ure)?\\.? *(Phys(?:ics)?\\.?)? *(?:\\([^\\)]+\\))?' + s_issue_and_page + ')\\b', 'ig');
     var r_science = new RegExp('\\b(?:Science *(?:\\([^\\)]+\\))?' + s_issue_and_page + ')\\b', 'ig');
-    var r_jphys = new RegExp('\\bJ(?:ournal)?\\.? *(?:of)? *P(?:hys)?(?:ics)?[ \\.:]*([ABDG]|C(?:ond(?:ens(?:ed)?)?)[ \\.]*(?:Mat(?:ter)))[^a-z][^0-9]*' + s_issue_and_page + '\\b', 'ig');
+    var r_jphys = new RegExp('\\bJ(?:ournal)?\\.? *(?:of)? *P(?:hys)?(?:ics)?[ \\.:]*([ABDG]|C(?:ond(?:ens(?:ed)?)?)[ \\.]*(?:Mat(?:ter)))' + s_issue_and_page + '\\b', 'ig');
     var r_njp = new RegExp('\\b(N)(?:ew)?\\.? *J(?:ournal)?\\.? *(?:of)? *P(?:hys)?(?:ics)?\\.?' + s_issue_and_page + '\\b', 'ig');
     var r_repprogphys = new RegExp('\\b(R)ep(?:orts?)?[\\. ]*(?:on)?[\\. ]*Prog(?:ress)?[\\. ]*(?:in)? *Phys(?:ics)?' + s_issue_and_page + '\\b', 'ig');
     var r_chemrev = new RegExp('\\bChem(?:\\.?|ical)?\\.? *R(?:ev)?(?:\\.?|iews?)' + s_issue_and_page + '\\b', 'ig');
