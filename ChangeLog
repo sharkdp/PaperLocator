@@ -5,6 +5,7 @@ ChangeLog
 * sitemap.xml and description meta tag for SEO
 * Fixed references like 'Reviews of Modern Physics, vol. 80, pp. 885–964, July
 2008' with additional words between journal and issue number.
+* updated browser extensions
 
 130526
 * ctrl + enter to go to document website
