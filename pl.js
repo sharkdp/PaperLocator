@@ -28,9 +28,23 @@ $(document).ready(function() {
     // Feedback form
     $("#feedbackSubmit"  ).click(function() { sendFeedback(); });
 
-    // Show help infobox if hash #intro is set
-    if (window.location.hash == '#intro') {
+    // See if cookie is present
+    var cookiePresent = false;
+    if (navigator.cookieEnabled && document.cookie.indexOf("showIntro=false") != -1) {
+        cookiePresent = true;
+    }
+
+    // Show help infobox if hash #intro is set or no cookie is present
+    if (!cookiePresent || window.location.hash == '#intro') {
         $("#help").delay(500).slideDown();
+    }
+
+    // Set cookie to hide intro box in the future
+    if (navigator.cookieEnabled) {
+        var expDate = new Date();
+        expDate.setDate(expDate.getDate() + 365);
+        var cookieString = "showIntro=false; expires=" + expDate.toUTCString();
+        document.cookie = cookieString;
     }
 
     // Do initial lookup, in case back-button has been used
