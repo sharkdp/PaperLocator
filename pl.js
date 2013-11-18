@@ -19,32 +19,35 @@ $(document).ready(function() {
     // Enable middle-click paste. Use timeout for asynchronous event handling
     $query.mouseup(function() {setTimeout(lookup, 0);});
 
-    // Enable footer buttons 
-    $("#helpButton"      ).click(function() { toggleInfoBox("#help"); });
-    $("#extensionsButton").click(function() { toggleInfoBox("#extensions"); });
-    $("#githubButton"    ).click(function() { toggleInfoBox("#github"); });
-    $("#feedbackButton, #messageLink").click(function() { toggleInfoBox("#feedback"); });
+    // Do not run the following code in the extensions
+    if ($("#help").length > 0) {
+        // Enable footer buttons 
+        $("#helpButton"      ).click(function() { toggleInfoBox("#help"); });
+        $("#extensionsButton").click(function() { toggleInfoBox("#extensions"); });
+        $("#githubButton"    ).click(function() { toggleInfoBox("#github"); });
+        $("#feedbackButton, #messageLink").click(function() { toggleInfoBox("#feedback"); });
 
-    // Feedback form
-    $("#feedbackSubmit"  ).click(function() { sendFeedback(); });
+        // Feedback form
+        $("#feedbackSubmit"  ).click(function() { sendFeedback(); });
 
-    // See if cookie is present
-    var cookiePresent = false;
-    if (navigator.cookieEnabled && document.cookie.indexOf("showIntro=false") != -1) {
-        cookiePresent = true;
-    }
+        // See if cookie is present
+        var cookiePresent = false;
+        if (navigator.cookieEnabled && document.cookie.indexOf("showIntro=false") != -1) {
+            cookiePresent = true;
+        }
 
-    // Show help infobox if hash #intro is set or no cookie is present
-    if (!cookiePresent || window.location.hash == '#intro') {
-        $("#help").delay(500).slideDown();
-    }
+        // Show help infobox if hash #intro is set or no cookie is present
+        if (!cookiePresent || window.location.hash == '#intro') {
+            $("#help").delay(500).slideDown();
+        }
 
-    // Set cookie to hide intro box in the future
-    if (navigator.cookieEnabled) {
-        var expDate = new Date();
-        expDate.setDate(expDate.getDate() + 365);
-        var cookieString = "showIntro=false; expires=" + expDate.toUTCString();
-        document.cookie = cookieString;
+        // Set cookie to hide intro box in the future
+        if (navigator.cookieEnabled) {
+            var expDate = new Date();
+            expDate.setDate(expDate.getDate() + 365);
+            var cookieString = "showIntro=false; expires=" + expDate.toUTCString();
+            document.cookie = cookieString;
+        }
     }
 
     // Do initial lookup, in case back-button has been used
