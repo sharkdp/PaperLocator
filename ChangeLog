@@ -1,6 +1,13 @@
 ChangeLog
 =========
 
+131128
+* Added framework for test cases
+
+131117
+* Updated to jQuery 2.0.3
+* Fixed Cookie-specific code for browser extensions
+
 130903
 * Show intro box for first time visitors
 
