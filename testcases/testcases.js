@@ -19,13 +19,23 @@ function generateTestCases() {
 }
 
 
+var showAll = false; // Show also the ones which passed
+
 function runTestCases() {
     var res;
     var numFailed = 0;
     var numCases = testCases.length;
-    var showAll = false; // Show also the ones which passed
+
+    document.body.innerHTML = '';
 
     document.write('Running ' + numCases + ' test cases ... (Go <a href="generate.html">here</a> to update the test cases, after checking the output below)<br /><br />');
+
+    if (showAll) {
+        document.write('<a href="javascript:showAll=false; runTestCases();">Show only failed tests</a><br /><br />');
+    }
+    else {
+        document.write('<a href="javascript:showAll=true; runTestCases();">Show all tests</a><br /><br />');
+    }
 
     $.each(testCases, function(i, tc) {
         query = decodeURIComponent(tc[0]);

@@ -141,5 +141,14 @@ var testQueries = [
     '[158] J. Struck, C. Ölschläger, M. Weinberg, P. Hauke, J. Simonet, A. Eckardt, M. Lewenstein, K. Sengstock, and P. Windpassinger, Phys. Rev. Lett. 108, 225304 (2012).',
     '[159] I. Talmi, Helv. Phys. Acta 25, 185 (1952).',
     '[160] C. Ticknor, R. M. Wilson, and J. L. Bohn, Phys. Rev. Lett. 106, 3 (2011).',
-    '[161] H. Weimer, R. Löw, T. Pfau, and H. P. Büchler, Phys. Rev. Lett. 101, 4 (2008).'
+    '[161] H. Weimer, R. Löw, T. Pfau, and H. P. Büchler, Phys. Rev. Lett. 101, 4 (2008).',
+    'Nature. 2006, 443, pp. 675',
+    ': Physics Today July 1997, page 36',
+    'Phys. Rev. Lett., 106(12):120405',
+    '00: Phys . Rev. Lett. 83 , 1467 (1999)',
+    'PRL 83(20) 4204-4207 (19',
+    'Phys. Rev. Lett. 82 (15 1999)',
+    'ers, Phys . Rev. Lett. 83 , 1467 (1999',
+    'bi, Phys, Rev. D 13, 3398 (19',
+    ' Science , 320 (5883):1601{1602, 2008',
 ];
