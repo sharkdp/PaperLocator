@@ -1,7 +1,6 @@
 compile.sh
 compiler.jar
 pl.min.js
-check
 chrome/pack.sh
 chrome/pl.zip
 testcases/output.js
