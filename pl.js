@@ -1,67 +1,10 @@
-$(document).ready(function() {
-    $("#submitWebsite").click(journalWebsite);
-    $("#submitDocument").click(showDocument);
-
-    var $query = $("#query");
-    // Register return/enter events
-    $query.keydown(function(e) {
-            if (e.which == 13 || e.keyCode == 13) {
-                if (e.ctrlKey) { // ctrl + enter
-                    journalWebsite();
-                }
-                else { // enter
-                    showDocument();
-                }
-            }
-        });
-    $query.keyup(lookup);
-
-    // Enable middle-click paste. Use timeout for asynchronous event handling
-    $query.mouseup(function() {setTimeout(lookup, 0);});
-
-    // Do not run the following code in the extensions
-    if ($("#help").length > 0) {
-        // Enable footer buttons 
-        $("#helpButton"      ).click(function() { toggleInfoBox("#help"); });
-        $("#extensionsButton").click(function() { toggleInfoBox("#extensions"); });
-        $("#githubButton"    ).click(function() { toggleInfoBox("#github"); });
-        $("#feedbackButton, #messageLink").click(function() { toggleInfoBox("#feedback"); });
-
-        // Feedback form
-        $("#feedbackSubmit"  ).click(function() { sendFeedback(); });
-
-        // See if cookie is present
-        var cookiePresent = false;
-        if (navigator.cookieEnabled && document.cookie.indexOf("showIntro=false") != -1) {
-            cookiePresent = true;
-        }
-
-        // Show help infobox if hash #intro is set or no cookie is present
-        if (!cookiePresent || window.location.hash == '#intro') {
-            $("#help").delay(500).slideDown();
-        }
-
-        // Set cookie to hide intro box in the future
-        if (navigator.cookieEnabled) {
-            var expDate = new Date();
-            expDate.setDate(expDate.getDate() + 365);
-            var cookieString = "showIntro=false; expires=" + expDate.toUTCString();
-            document.cookie = cookieString;
-        }
-    }
-
-    // Do initial lookup, in case back-button has been used
-    // and query field is already filled
-    lookup();
-});
-
-
 var record = {journal: '', reference: '', website: '', document: ''};
 var lastMessage = "";
+var lastQuery = "";
 var notificationOn = false;
 
 function notify(message) {
-    if (message == lastMessage) {
+    if (message === lastMessage) {
         return;
     }
     lastMessage = message;
@@ -110,28 +53,17 @@ function sendFeedback() {
     });
 }
 
-function lookup() {
-    var query = $("#query").val();
-    var res = findRef(query);
-
-    if (res && record["journal"] != "" && record["reference"] != "") {
-        notify('Detected <i>' + record["journal"] + '</i> reference:<br><div id="reference">' + record["reference"] + '</div>');
-    }
-
-    return res;
-}
-
 function findRef(query) {
     query = $.trim(query);
 
-    if (query == "") {
+    if (query === "") {
         return false;
     }
 
-    record["journal"] = '';
-    record["reference"] = '';
-    record["website"] = '';
-    record["document"] = '';
+    record.journal = '';
+    record.reference = '';
+    record.website = '';
+    record.document = '';
 
     // Create the RegExp objects locally to reset .lastIndex property
     // see: [http://stackoverflow.com/questions/1520800/why-regexp-with-global-flag-in-javascript-give-wrong-results]
@@ -156,19 +88,19 @@ function findRef(query) {
 
     // Search for DOI
     if (m = r_doi.exec(query)) {
-        record["journal"] = 'DOI';
-        record["reference"] = m[1];
-        record["website"] = 'http://doi.org/' + m[1];
+        record.journal = 'DOI';
+        record.reference = m[1];
+        record.website = 'http://doi.org/' + m[1];
         return true;
     }
 
     // Search for arXiv ID
     if ((m = r_arXiv.exec(query)) || (m = r_arXiv_old.exec(query))) {
         var id = m[1].toLowerCase();
-        record["journal"] = 'arXiv';
-        record["reference"] = 'arXiv:' + id;
-        record["website"] = 'http://arxiv.org/abs/' + id;
-        record["document"] = 'http://arxiv.org/pdf/' + id;
+        record.journal = 'arXiv';
+        record.reference = 'arXiv:' + id;
+        record.website = 'http://arxiv.org/abs/' + id;
+        record.document = 'http://arxiv.org/pdf/' + id;
         return true;
     }
 
@@ -182,10 +114,10 @@ function findRef(query) {
         journal = journal.replace(/^L.*/, "L").toUpperCase();
         var longjournal = journal.replace("L", "Lett.");
 
-        record["journal"] = 'Phys. Rev. ' + longjournal;
-        record["reference"] = 'PR' + journal + ' <b>' + volume + '</b>, ' + article;
-        record["website"] = 'http://link.aps.org/citesearch?journal=PR' + journal + '&volume=' + volume + '&article=' + article;
-        record["document"] = 'doAJAX';
+        record.journal = 'Phys. Rev. ' + longjournal;
+        record.reference = 'PR' + journal + ' <b>' + volume + '</b>, ' + article;
+        record.website = 'http://link.aps.org/citesearch?journal=PR' + journal + '&volume=' + volume + '&article=' + article;
+        record.document = 'doAJAX';
         return true;
     }
 
@@ -194,10 +126,10 @@ function findRef(query) {
         var volume = m[1];
         var article = m[2];
 
-        record["journal"] = 'Rev. Mod. Phys';
-        record["reference"] = 'RMP <b>' + volume + '</b>, ' + article;
-        record["website"] = 'http://link.aps.org/citesearch?journal=RMP&volume=' + volume + '&article=' + article;
-        record["document"] = 'doAJAX';
+        record.journal = 'Rev. Mod. Phys';
+        record.reference = 'RMP <b>' + volume + '</b>, ' + article;
+        record.website = 'http://link.aps.org/citesearch?journal=RMP&volume=' + volume + '&article=' + article;
+        record.document = 'doAJAX';
         return true;
     }
 
@@ -216,9 +148,9 @@ function findRef(query) {
             param = 'default';
         }
 
-        record["journal"] = 'Nature';
-        record["reference"] = 'Nature ' + journal + '<b>' + volume + '</b>, ' + article;
-        record["website"] = 'http://www.nature.com/search/executeSearch?sp-advanced=true&sp-m=0&siteCode=' + param + '&sp-p=all&&sp-p-2=all&&sp-p-3=all&sp-q-4=' + volume + '&sp-q-5=&sp-q-6=' + article + '&sp-date-range=0&sp-c=25';
+        record.journal = 'Nature';
+        record.reference = 'Nature ' + journal + '<b>' + volume + '</b>, ' + article;
+        record.website = 'http://www.nature.com/search/executeSearch?sp-advanced=true&sp-m=0&siteCode=' + param + '&sp-p=all&&sp-p-2=all&&sp-p-3=all&sp-q-4=' + volume + '&sp-q-5=&sp-q-6=' + article + '&sp-date-range=0&sp-c=25';
         return true;
     }
 
@@ -227,9 +159,9 @@ function findRef(query) {
         var volume = m[1];
         var article = m[2];
 
-        record["journal"] = 'Science';
-        record["reference"] = 'Science <b>' + volume + '</b>, ' + article;
-        record["website"] = 'http://www.sciencemag.org/search?volume=' + volume + '&firstpage=' + article + '&submit=yes';
+        record.journal = 'Science';
+        record.reference = 'Science <b>' + volume + '</b>, ' + article;
+        record.website = 'http://www.sciencemag.org/search?volume=' + volume + '&firstpage=' + article + '&submit=yes';
         return true;
     }
 
@@ -243,17 +175,17 @@ function findRef(query) {
         var volume = m[2];
         var article = m[3];
 
-        if (journal[0] == 'C') {
+        if (journal[0] === 'C') {
             journal = 'C';
         }
 
         var journalName = 'Journal of Physics ' + journal;
         var shortName = 'J. Phys. ' + journal;
-        if (journal == 'N') {
+        if (journal === 'N') {
             journalName = 'New Journal of Physics';
             shortName = 'NJP';
         }
-        else if (journal == 'R') {
+        else if (journal === 'R') {
             shortName = journalName = 'Rep. Prog. Phys.';
         }
 
@@ -285,9 +217,9 @@ function findRef(query) {
                     break;
                 }
             }
-            record["journal"] = journalName;
-            record["reference"] = shortName + ' <b>' + volume + '</b>, ' + article;
-            record["website"] = 'http://iopscience.iop.org/findcontent?CF_JOURNAL=' + journalID + '&CF_VOLUME=' + volume + '&CF_ISSUE=&CF_PAGE=' + article + '&submit=Go&navsubmit=Go';
+            record.journal = journalName;
+            record.reference = shortName + ' <b>' + volume + '</b>, ' + article;
+            record.website = 'http://iopscience.iop.org/findcontent?CF_JOURNAL=' + journalID + '&CF_VOLUME=' + volume + '&CF_ISSUE=&CF_PAGE=' + article + '&submit=Go&navsubmit=Go';
             return true;
         }
     }
@@ -297,32 +229,45 @@ function findRef(query) {
         var volume = m[1];
         var article = m[2];
 
-        record["journal"] = 'Chemical Review';
-        record["reference"] = 'Chem. Rev. <b>' + volume + '</b>, ' + article;
-        record["website"] = 'http://pubs.acs.org/action/quickLink?quickLinkJournal=chreay&quickLinkVolume=' + volume + '&quickLinkPage=' + article;
+        record.journal = 'Chemical Review';
+        record.reference = 'Chem. Rev. <b>' + volume + '</b>, ' + article;
+        record.website = 'http://pubs.acs.org/action/quickLink?quickLinkJournal=chreay&quickLinkVolume=' + volume + '&quickLinkPage=' + article;
         return true;
     }
 
     // Found nothing -> redirect to Google scholar
-    record["website"] = 'http://paperlocator.com/redirect.php?q=' + encodeURI(query);
+    record.website = 'http://paperlocator.com/redirect.php?q=' + encodeURI(query);
     return false;
 
 }
 
+function lookup() {
+    var query = $("#query").val();
+
+    if (query !== lastQuery) {
+        lastQuery = query;
+        var res = findRef(query);
+
+        if (res && record.journal != "" && record.reference != "") {
+            notify('Detected <i>' + record.journal + '</i> reference:<br><div id="reference">' + record.reference + '</div>');
+        }
+    }
+}
+
 function journalWebsite() {
-    if (record["website"] != '') {
-        openURL(record["website"]);
+    if (record.website != '') {
+        openURL(record.website);
     }
 }
 
 function showDocument() {
-    if (record["document"] != '') {
-        if (record["document"] == 'doAJAX' && record["website"] != "") {
+    if (record.document != '') {
+        if (record.document == 'doAJAX' && record.website != "") {
             // Lookup PDF URL for APS references
             $("body, #submitDocument").css("cursor", "progress");
             $.ajax({
                 url: 'http://paperlocator.com/aps_lookup.php',
-                data: {url: encodeURI(record["website"])},
+                data: {url: encodeURI(record.website)},
                 type: 'GET'
             }).success(function(data) {
                 if ($.trim(data) != '') {
@@ -335,7 +280,7 @@ function showDocument() {
                     openURL('http://' + subdomain + '.aps.org' + data);
                 }
                 else {
-                    openURL(record["website"]);
+                    openURL(record.website);
                 }
             }).error(function () {
                 notify('AJAX lookup failed');
@@ -343,11 +288,11 @@ function showDocument() {
             });
         }
         else {
-            openURL(record["document"]);
+            openURL(record.document);
         }
     }
-    else if (record["website"] != '') {
-        openURL(record["website"]);
+    else if (record.website != '') {
+        openURL(record.website);
     }
 }
 
@@ -355,3 +300,62 @@ function openURL(url) {
     // Use seperate function to support browser extensions
     location.href = url;
 }
+
+$(document).ready(function() {
+    $("#submitWebsite").click(journalWebsite);
+    $("#submitDocument").click(showDocument);
+
+    var $query = $("#query");
+    // Register return/enter events
+    $query.keydown(function(e) {
+            if (e.which == 13 || e.keyCode == 13) {
+                if (e.ctrlKey) { // ctrl + enter
+                    journalWebsite();
+                }
+                else { // enter
+                    showDocument();
+                }
+            }
+        });
+    $query.keyup(lookup);
+
+    // Enable middle-click paste. Use timeout for asynchronous event handling
+    $query.mouseup(function() {setTimeout(lookup, 0);});
+
+    $query.on('input propertychange paste', function() {setTimeout(lookup, 0);});
+
+    // Do not run the following code in the extensions
+    if ($("#help").length > 0) {
+        // Enable footer buttons
+        $("#helpButton"      ).click(function() { toggleInfoBox("#help"); });
+        $("#extensionsButton").click(function() { toggleInfoBox("#extensions"); });
+        $("#githubButton"    ).click(function() { toggleInfoBox("#github"); });
+        $("#feedbackButton, #messageLink").click(function() { toggleInfoBox("#feedback"); });
+
+        // Feedback form
+        $("#feedbackSubmit"  ).click(function() { sendFeedback(); });
+
+        // See if cookie is present
+        var cookiePresent = false;
+        if (navigator.cookieEnabled && document.cookie.indexOf("showIntro=false") != -1) {
+            cookiePresent = true;
+        }
+
+        // Show help infobox if hash #intro is set or no cookie is present
+        if (!cookiePresent || window.location.hash == '#intro') {
+            $("#help").delay(500).slideDown();
+        }
+
+        // Set cookie to hide intro box in the future
+        if (navigator.cookieEnabled) {
+            var expDate = new Date();
+            expDate.setDate(expDate.getDate() + 365);
+            var cookieString = "showIntro=false; expires=" + expDate.toUTCString();
+            document.cookie = cookieString;
+        }
+    }
+
+    // Do initial lookup, in case back-button has been used
+    // and query field is already filled
+    lookup();
+});
