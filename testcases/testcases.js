@@ -43,7 +43,7 @@ function runTestCases() {
         var oldRef = decodeURIComponent(tc[1]);
         var res = findRef(query);
         if (showAll || record.reference != oldRef) {
-            document.write('Test case: <i>' + query + '</i><br><pre>');
+            document.write('Test case: <code>' + query + '</code><br><pre>');
             document.write('<span style="color: red">Old reference</span>: ' + oldRef + '<br>');
             document.write('<span style="color: green">New reference</span>: ' + record.reference + '<br>');
             document.write('<span style="color: green">Journal</span>:       ' + record.journal + '<br>');
