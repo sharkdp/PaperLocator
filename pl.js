@@ -111,7 +111,7 @@ function findRef(query) {
         var article = m[3];
 
         // Replace Lett./Letters etc by L
-        journal = journal.replace(/^L.*/, "L").toUpperCase();
+        journal = journal.replace(/^[Ll].*/, "L").toUpperCase();
         var longjournal = journal.replace("L", "Lett.");
 
         record.journal = 'Phys. Rev. ' + longjournal;
