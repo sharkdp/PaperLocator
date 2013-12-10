@@ -1,6 +1,9 @@
 # create pl.min.js
 bash compile.sh
 
+# update date in sitemap.xml
+sed -i 's/<lastmod>[^<]*<\/lastmod>/<lastmod>'`date +"%Y-%m-%d"`'<\/lastmod>/g' sitemap.xml
+
 # replace pl.js -> pl.min.js
 sed -i 's/parser\.js/parser.min.js/g' index.html
 sed -i 's/interface\.js/interface.min.js/g' index.html
