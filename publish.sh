@@ -2,11 +2,12 @@
 bash compile.sh
 
 # replace pl.js -> pl.min.js
-sed -i 's/pl\.js/pl.min.js/g' index.html
+sed -i 's/parser\.js/parser.min.js/g' index.html
+sed -i 's/interface\.js/interface.min.js/g' index.html
 
 # update browser extensions
-cp pl.css pl.min.js chrome/pl
-cp pl.css pl.min.js firefox/pl
+cp pl.css parser.min.js interface.min.js chrome/pl
+cp pl.css parser.min.js interface.min.js firefox/pl
 
 # merge differences in html files
 diffuse index.html chrome/pl/index.html

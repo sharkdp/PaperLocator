@@ -1,69 +1,15 @@
-var record = {journal: '', reference: '', website: '', document: ''};
-var lastMessage = "";
-var lastQuery = "";
-var notificationOn = false;
-
-function notify(message) {
-    if (message === lastMessage) {
-        return;
-    }
-    lastMessage = message;
-    var $div = $("#notification");
-    $div.html("<p>" + message + "</p>");
-    if (!notificationOn) {
-        notificationOn = true;
-        $div.slideToggle().delay(3000).slideToggle({complete: function() {notificationOn = false;}});
-    }
-}
-
-function toggleInfoBox(id) {
-    var $id = $(id);
-    if ($id.is(":visible")) {
-        $id.slideUp();
-    }
-    else {
-        var $box = $("div.infobox:visible");
-        if ($box.length > 0) {
-            $box.slideUp(400, function () {
-                $id.slideDown();
-            });
-        }
-        else {
-            $id.slideDown();
-        }
-    }
-}
-
-function sendFeedback() {
-    $("body, #submitDocument").css("cursor", "progress");
-    $.ajax({
-        url: 'http://paperlocator.com/feedback.php',
-        data: {
-            name: $("#feedbackName").val(),
-            email: $("#feedbackEmail").val(),
-            message: $("#feedbackMessage").val()
-        },
-        type: 'POST'
-    }).success(function(data) {
-        $("#feedback").html('<p class="instr">Feedback sent</p><p>Thank you!</p>');
-        $("body, #submitDocument").css("cursor", "default");
-    }).error(function () {
-        notify('Sending feedback failed');
-        $("body, #submitDocument").css("cursor", "default");
-    });
-}
-
 function findRef(query) {
-    query = $.trim(query);
+    var record = {journal: '', reference: '', website: '', document: ''};
+
+    if (query === undefined) {
+        return record;
+    }
+
+    query = query.trim();
 
     if (query === "") {
-        return false;
+        return record;
     }
-
-    record.journal = '';
-    record.reference = '';
-    record.website = '';
-    record.document = '';
 
     // Create the RegExp objects locally to reset .lastIndex property
     // see: [http://stackoverflow.com/questions/1520800/why-regexp-with-global-flag-in-javascript-give-wrong-results]
@@ -88,14 +34,14 @@ function findRef(query) {
     var r_repprogphys = new RegExp('\\b(R)ep(?:orts?)?[\\. ]*(?:on)?[\\. ]*Prog(?:ress)?[\\. ]*(?:in)? *Phys(?:ics)?' + s_issue_and_page + '\\b', 'ig');
     var r_chemrev = new RegExp('\\bChem(?:\\.?|ical)?\\.? *R(?:ev)?(?:\\.?|iews?)' + s_issue_and_page + '\\b', 'ig');
 
-    var m, res = '';
+    var m;
 
     // Search for DOI
     if (m = r_doi.exec(query)) {
         record.journal = 'DOI';
         record.reference = m[1];
         record.website = 'http://doi.org/' + m[1];
-        return true;
+        return record;
     }
 
     // Search for arXiv ID
@@ -105,7 +51,7 @@ function findRef(query) {
         record.reference = 'arXiv:' + id;
         record.website = 'http://arxiv.org/abs/' + id;
         record.document = 'http://arxiv.org/pdf/' + id;
-        return true;
+        return record;
     }
 
     // Search for APS references
@@ -122,7 +68,7 @@ function findRef(query) {
         record.reference = 'PR' + journal + ' <b>' + volume + '</b>, ' + article;
         record.website = 'http://link.aps.org/citesearch?journal=PR' + journal + '&volume=' + volume + '&article=' + article;
         record.document = 'doAJAX';
-        return true;
+        return record;
     }
 
     // Search for Rev. Mod. Phys. references
@@ -134,7 +80,7 @@ function findRef(query) {
         record.reference = 'RMP <b>' + volume + '</b>, ' + article;
         record.website = 'http://link.aps.org/citesearch?journal=RMP&volume=' + volume + '&article=' + article;
         record.document = 'doAJAX';
-        return true;
+        return record;
     }
 
     // Search for Nature references
@@ -155,7 +101,7 @@ function findRef(query) {
         record.journal = 'Nature';
         record.reference = 'Nature ' + journal + '<b>' + volume + '</b>, ' + article;
         record.website = 'http://www.nature.com/search/executeSearch?sp-advanced=true&sp-m=0&siteCode=' + param + '&sp-p=all&&sp-p-2=all&&sp-p-3=all&sp-q-4=' + volume + '&sp-q-5=&sp-q-6=' + article + '&sp-date-range=0&sp-c=25';
-        return true;
+        return record;
     }
 
     // Search for Science references
@@ -166,7 +112,7 @@ function findRef(query) {
         record.journal = 'Science';
         record.reference = 'Science <b>' + volume + '</b>, ' + article;
         record.website = 'http://www.sciencemag.org/search?volume=' + volume + '&firstpage=' + article + '&submit=yes';
-        return true;
+        return record;
     }
 
     // Search for IOP references
@@ -214,8 +160,9 @@ function findRef(query) {
         if (journal in iopJournals) {
             var ids = iopJournals[journal];
             var journalID = ids[0];
-            var volumen = parseInt(volume);
-            for (var maxVol in ids) {
+            var volumen = parseInt(volume, 10);
+            var maxVol;
+            for (maxVol in ids) {
                 if (volumen <= maxVol) {
                     journalID = ids[maxVol];
                     break;
@@ -224,7 +171,7 @@ function findRef(query) {
             record.journal = journalName;
             record.reference = shortName + ' <b>' + volume + '</b>, ' + article;
             record.website = 'http://iopscience.iop.org/findcontent?CF_JOURNAL=' + journalID + '&CF_VOLUME=' + volume + '&CF_ISSUE=&CF_PAGE=' + article + '&submit=Go&navsubmit=Go';
-            return true;
+            return record;
         }
     }
 
@@ -236,130 +183,11 @@ function findRef(query) {
         record.journal = 'Chemical Review';
         record.reference = 'Chem. Rev. <b>' + volume + '</b>, ' + article;
         record.website = 'http://pubs.acs.org/action/quickLink?quickLinkJournal=chreay&quickLinkVolume=' + volume + '&quickLinkPage=' + article;
-        return true;
+        return record;
     }
 
     // Found nothing -> redirect to Google scholar
     record.website = 'http://paperlocator.com/redirect.php?q=' + encodeURI(query);
-    return false;
+    return record;
 
 }
-
-function lookup() {
-    var query = $("#query").val();
-
-    if (query !== lastQuery) {
-        lastQuery = query;
-        var res = findRef(query);
-
-        if (res && record.journal != "" && record.reference != "") {
-            notify('Detected <i>' + record.journal + '</i> reference:<br><div id="reference">' + record.reference + '</div>');
-        }
-    }
-}
-
-function journalWebsite() {
-    if (record.website != '') {
-        openURL(record.website);
-    }
-}
-
-function showDocument() {
-    if (record.document != '') {
-        if (record.document == 'doAJAX' && record.website != "") {
-            // Lookup PDF URL for APS references
-            $("body, #submitDocument").css("cursor", "progress");
-            $.ajax({
-                url: 'http://paperlocator.com/aps_lookup.php',
-                data: {url: encodeURI(record.website)},
-                type: 'GET'
-            }).success(function(data) {
-                if ($.trim(data) != '') {
-                    var splitURL = data.split("/");
-                    var subdomain = splitURL[2].toLowerCase();
-                    if (subdomain == 'pr') {
-                        subdomain = 'prola';
-                    }
-                    $("body, #submitDocument").css("cursor", "default");
-                    openURL('http://' + subdomain + '.aps.org' + data);
-                }
-                else {
-                    openURL(record.website);
-                }
-            }).error(function () {
-                notify('AJAX lookup failed');
-                $("body, #submitDocument").css("cursor", "default");
-            });
-        }
-        else {
-            openURL(record.document);
-        }
-    }
-    else if (record.website != '') {
-        openURL(record.website);
-    }
-}
-
-function openURL(url) {
-    // Use seperate function to support browser extensions
-    location.href = url;
-}
-
-$(document).ready(function() {
-    $("#submitWebsite").click(journalWebsite);
-    $("#submitDocument").click(showDocument);
-
-    var $query = $("#query");
-    // Register return/enter events
-    $query.keydown(function(e) {
-            if (e.which == 13 || e.keyCode == 13) {
-                if (e.ctrlKey) { // ctrl + enter
-                    journalWebsite();
-                }
-                else { // enter
-                    showDocument();
-                }
-            }
-        });
-    $query.keyup(lookup);
-
-    // Enable middle-click paste. Use timeout for asynchronous event handling
-    $query.mouseup(function() {setTimeout(lookup, 0);});
-
-    $query.on('input propertychange paste', function() {setTimeout(lookup, 0);});
-
-    // Do not run the following code in the extensions
-    if ($("#help").length > 0) {
-        // Enable footer buttons
-        $("#helpButton"      ).click(function() { toggleInfoBox("#help"); });
-        $("#extensionsButton").click(function() { toggleInfoBox("#extensions"); });
-        $("#githubButton"    ).click(function() { toggleInfoBox("#github"); });
-        $("#feedbackButton, #messageLink").click(function() { toggleInfoBox("#feedback"); });
-
-        // Feedback form
-        $("#feedbackSubmit"  ).click(function() { sendFeedback(); });
-
-        // See if cookie is present
-        var cookiePresent = false;
-        if (navigator.cookieEnabled && document.cookie.indexOf("showIntro=false") != -1) {
-            cookiePresent = true;
-        }
-
-        // Show help infobox if hash #intro is set or no cookie is present
-        if (!cookiePresent || window.location.hash == '#intro') {
-            $("#help").delay(500).slideDown();
-        }
-
-        // Set cookie to hide intro box in the future
-        if (navigator.cookieEnabled) {
-            var expDate = new Date();
-            expDate.setDate(expDate.getDate() + 365);
-            var cookieString = "showIntro=false; expires=" + expDate.toUTCString();
-            document.cookie = cookieString;
-        }
-    }
-
-    // Do initial lookup, in case back-button has been used
-    // and query field is already filled
-    lookup();
-});

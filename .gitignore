@@ -1,6 +1,9 @@
 compile.sh
 compiler.jar
-pl.min.js
+parser.min.js
+interface.min.js
 chrome/pack.sh
 chrome/pl.zip
 testcases/output.js
+testcases/output.old.js
+testcases/coverage
