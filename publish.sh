@@ -12,6 +12,9 @@ sed -i 's/interface\.js/interface.min.js/g' index.html
 cp pl.css parser.min.js interface.min.js chrome/pl
 cp pl.css parser.min.js interface.min.js firefox/pl
 
+# update CLI version
+cp parser.min.js cli
+
 # merge differences in html files
 diffuse index.html chrome/pl/index.html
 diffuse index.html firefox/pl/index.html
