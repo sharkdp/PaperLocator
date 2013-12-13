@@ -58,28 +58,30 @@ function findRef(query) {
     if (m = r_aps.exec(query)) {
         var journal = m[1];
         var volume = m[2];
-        var article = m[3];
+        var page = m[3];
 
         // Replace Lett./Letters etc by L
         journal = journal.replace(/^[Ll].*/, "L").toUpperCase();
         var longjournal = journal.replace("L", "Lett.");
 
         record.journal = 'Phys. Rev. ' + longjournal;
-        record.reference = 'PR' + journal + ' <b>' + volume + '</b>, ' + article;
-        record.website = 'http://link.aps.org/citesearch?journal=PR' + journal + '&volume=' + volume + '&article=' + article;
+        record.reference = 'PR' + journal + ' <b>' + volume + '</b>, ' + page;
+        record.website = 'http://link.aps.org/citesearch?journal=PR' + journal + '&volume=' + volume + '&article=' + page;
         record.document = 'doAJAX';
+        record.ajaxCall = 'php/lookup_aps.php?journal=PR' + journal + '&volume=' + volume + '&page=' + page;
         return record;
     }
 
     // Search for Rev. Mod. Phys. references
     if (m = r_rmp.exec(query)) {
         var volume = m[1];
-        var article = m[2];
+        var page = m[2];
 
         record.journal = 'Rev. Mod. Phys';
-        record.reference = 'RMP <b>' + volume + '</b>, ' + article;
-        record.website = 'http://link.aps.org/citesearch?journal=RMP&volume=' + volume + '&article=' + article;
+        record.reference = 'RMP <b>' + volume + '</b>, ' + page;
+        record.website = 'http://link.aps.org/citesearch?journal=RMP&volume=' + volume + '&article=' + page;
         record.document = 'doAJAX';
+        record.ajaxCall = 'php/lookup.aps?journal=RMP&volume=' + volume + '&page=' + page;
         return record;
     }
 
@@ -187,7 +189,7 @@ function findRef(query) {
     }
 
     // Found nothing -> redirect to Google scholar
-    record.website = 'http://paperlocator.com/redirect.php?q=' + encodeURI(query);
+    record.website = 'http://paperlocator.com/php/redirect.php?q=' + encodeURI(query);
     return record;
 
 }

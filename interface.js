@@ -37,7 +37,7 @@ function toggleInfoBox(id) {
 function sendFeedback() {
     $("body, #submitDocument").css("cursor", "progress");
     $.ajax({
-        url: 'http://paperlocator.com/feedback.php',
+        url: 'http://paperlocator.com/php/feedback.php',
         data: {
             name: $("#feedbackName").val(),
             email: $("#feedbackEmail").val(),
@@ -74,22 +74,16 @@ function journalWebsite() {
 
 function showDocument() {
     if (lastRecord.document !== '') {
-        if (lastRecord.document === 'doAJAX' && lastRecord.website !== "") {
-            // Lookup PDF URL for APS references
+        if (lastRecord.document === 'doAJAX' && lastRecord.ajaxCall !== "") {
+            // Lookup PDF URL
             $("body, #submitDocument").css("cursor", "progress");
             $.ajax({
-                url: 'http://paperlocator.com/aps_lookup.php',
-                data: {url: encodeURI(lastRecord.website)},
+                url: 'http://paperlocator.com/' + lastRecord.ajaxCall,
                 type: 'GET'
             }).success(function(data) {
                 if ($.trim(data) != '') {
-                    var splitURL = data.split("/");
-                    var subdomain = splitURL[2].toLowerCase();
-                    if (subdomain == 'pr') {
-                        subdomain = 'prola';
-                    }
                     $("body, #submitDocument").css("cursor", "default");
-                    openURL('http://' + subdomain + '.aps.org' + data);
+                    openURL(data);
                 }
                 else {
                     openURL(lastRecord.website);
@@ -97,6 +91,9 @@ function showDocument() {
             }).error(function () {
                 notify('AJAX lookup failed');
                 $("body, #submitDocument").css("cursor", "default");
+                if (lastRecord.website !== '') {
+                    openURL(lastRecord.website);
+                }
             });
         }
         else {

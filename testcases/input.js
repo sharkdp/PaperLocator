@@ -44,6 +44,7 @@ GLOBAL.testQueries = [
     'PRL 83(20) 4204-4207 (19',
     'ers, Phys . Rev. Lett. 83 , 1467 (1999',
     'bi, Phys, Rev. D 13, 3398 (19',
+    'Physical.Review,Lett 50 1395',
     ' Science , 320 (5883):1601{1602, 2008',
     'Rev. Mod. Phys. 80, 885 (2008).',
     'Review  of Modern  Physics 83, 1523 (2011).',
