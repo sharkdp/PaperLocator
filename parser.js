@@ -91,20 +91,22 @@ function findRef(query) {
         var volume = m[2];
         var page = m[3];
         var param = '';
+        var arg = '';
         if (typeof journal !== 'undefined' && journal.search(/phys/i) != -1) {
             journal = 'Phys. ';
-            param = 'nphys';
+            param = 'nphys&sp-q-9%5BNPHYS%5D';
+            arg = 'nphys';
         }
         else {
             journal = '';
-            param = '';
+            param = 'default';
         }
 
         record.journal = 'Nature';
         record.reference = 'Nature ' + journal + '<b>' + volume + '</b>, ' + page;
-        record.website = 'http://www.nature.com/search/executeSearch?sp-advanced=true&sp-m=0&siteCode=' + param + '&sp-p=all&&sp-p-2=all&&sp-p-3=all&sp-q-4=' + volume + '&sp-q-5=&sp-q-6=' + page + '&sp-date-range=0&sp-c=25';
+        record.website = 'http://www.nature.com/search/executeSearch?sp-advanced=true&sp-m=0&siteCode=' + param+ '&sp-p=all&&sp-p-2=all&&sp-p-3=all&sp-q-4=' + volume + '&sp-q-5=&sp-q-6=' + page + '&sp-date-range=0&sp-c=25';
         record.document = 'doAJAX';
-        record.ajaxCall = 'php/lookup_nature.php?journal=' + param + '&volume=' + volume + '&page=' + page;
+        record.ajaxCall = 'php/lookup_nature.php?journal=' + arg + '&volume=' + volume + '&page=' + page;
         return record;
     }
 
