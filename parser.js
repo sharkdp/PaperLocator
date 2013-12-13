@@ -89,31 +89,35 @@ function findRef(query) {
     if (m = r_nature.exec(query)) {
         var journal = m[1];
         var volume = m[2];
-        var article = m[3];
+        var page = m[3];
         var param = '';
         if (typeof journal !== 'undefined' && journal.search(/phys/i) != -1) {
             journal = 'Phys. ';
-            param = 'nphys&sp-q-9%5BNPHYS%5D';
+            param = 'nphys';
         }
         else {
             journal = '';
-            param = 'default';
+            param = '';
         }
 
         record.journal = 'Nature';
-        record.reference = 'Nature ' + journal + '<b>' + volume + '</b>, ' + article;
-        record.website = 'http://www.nature.com/search/executeSearch?sp-advanced=true&sp-m=0&siteCode=' + param + '&sp-p=all&&sp-p-2=all&&sp-p-3=all&sp-q-4=' + volume + '&sp-q-5=&sp-q-6=' + article + '&sp-date-range=0&sp-c=25';
+        record.reference = 'Nature ' + journal + '<b>' + volume + '</b>, ' + page;
+        record.website = 'http://www.nature.com/search/executeSearch?sp-advanced=true&sp-m=0&siteCode=' + param + '&sp-p=all&&sp-p-2=all&&sp-p-3=all&sp-q-4=' + volume + '&sp-q-5=&sp-q-6=' + page + '&sp-date-range=0&sp-c=25';
+        record.document = 'doAJAX';
+        record.ajaxCall = 'php/lookup_nature.php?journal=' + param + '&volume=' + volume + '&page=' + page;
         return record;
     }
 
     // Search for Science references
     if (m = r_science.exec(query)) {
         var volume = m[1];
-        var article = m[2];
+        var page = m[2];
 
         record.journal = 'Science';
-        record.reference = 'Science <b>' + volume + '</b>, ' + article;
-        record.website = 'http://www.sciencemag.org/search?volume=' + volume + '&firstpage=' + article + '&submit=yes';
+        record.reference = 'Science <b>' + volume + '</b>, ' + page;
+        record.website = 'http://www.sciencemag.org/search?volume=' + volume + '&firstpage=' + page + '&submit=yes';
+        record.document = 'doAJAX';
+        record.ajaxCall = 'php/lookup_science.php?&volume=' + volume + '&page=' + page;
         return record;
     }
 
