@@ -5,6 +5,23 @@ function checkRef(query, oldRef) {
     });
 }
 
+// Special cases
+describe("findRef", function () {
+    var empty = {journal: '', reference: '', website: '', document: ''};
+
+    it("should return an empty reference", function () {
+        expect(findRef("")).toEqual(empty);
+        expect(findRef("\t")).toEqual(empty);
+        expect(findRef("    ")).toEqual(empty);
+        expect(findRef(undefined)).toEqual(empty);
+    });
+
+    it("should point to Scholar if no ref was found", function () {
+        expect(findRef("No reference here").website)
+            .toEqual('http://paperlocator.com/php/redirect.php?q=No%20reference%20here');
+    });
+});
+
 describe("Plain", function() {
     var i, tc, query, oldRef;
     for(i = 0; i < testCases.length; i++) {
@@ -42,21 +59,4 @@ describe("Adding noise to", function() {
             }
         }
     }
-});
-
-// Special cases
-describe("findRef", function () {
-    var empty = {journal: '', reference: '', website: '', document: ''};
-
-    it("should return an empty reference", function () {
-        expect(findRef("")).toEqual(empty);
-        expect(findRef("\t")).toEqual(empty);
-        expect(findRef("    ")).toEqual(empty);
-        expect(findRef(undefined)).toEqual(empty);
-    });
-
-    it("should point to Scholar if no ref was found", function () {
-        expect(findRef("No reference here").website)
-            .toEqual('http://paperlocator.com/php/redirect.php?q=No%20reference%20here');
-    });
 });

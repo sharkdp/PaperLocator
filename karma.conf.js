@@ -15,7 +15,7 @@ module.exports = function(config) {
       // 'pl.js',
       'testcases/output.js',
       'parser.js',
-      'testcases/*.test.js'
+      'testcases/parser.test.js'
     ],
 
     preprocessors: {
