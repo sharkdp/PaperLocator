@@ -33,6 +33,7 @@ function findRef(query) {
     var r_njp = new RegExp('\\b(N)(?:ew)?\\.? *J(?:ournal)?\\.? *(?:of)? *P(?:hys)?(?:ics)?\\.?' + s_issue_and_page + '\\b', 'ig');
     var r_repprogphys = new RegExp('\\b(R)ep(?:orts?)?[\\. ]*(?:on)?[\\. ]*Prog(?:ress)?[\\. ]*(?:in)? *Phys(?:ics)?' + s_issue_and_page + '\\b', 'ig');
     var r_chemrev = new RegExp('\\bChem(?:\\.?|ical)?\\.? *R(?:ev)?(?:\\.?|iews?)' + s_issue_and_page + '\\b', 'ig');
+    var r_jmathphys = new RegExp('\\bJ(?:ournal)?\\.? *(?:of)? *M(?:ath(?:ematical)?)?\\.? *P(?:hys(?:ics)?)' + s_issue_and_page + '\\b', 'ig');
 
     var m;
 
@@ -66,7 +67,8 @@ function findRef(query) {
 
         record.journal = 'Phys. Rev. ' + longjournal;
         record.reference = 'PR' + journal + ' <b>' + volume + '</b>, ' + page;
-        record.website = 'http://link.aps.org/citesearch?journal=PR' + journal + '&volume=' + volume + '&article=' + page;
+        // Work-around solution for the new APS website:
+        record.website = 'http://journals.aps.org/search/?q=PR' + journal + '%20' + volume + ',%20' + page;
         record.document = 'doAJAX';
         record.ajaxCall = 'php/lookup_aps.php?journal=PR' + journal + '&volume=' + volume + '&page=' + page;
         return record;
@@ -79,7 +81,8 @@ function findRef(query) {
 
         record.journal = 'Rev. Mod. Phys';
         record.reference = 'RMP <b>' + volume + '</b>, ' + page;
-        record.website = 'http://link.aps.org/citesearch?journal=RMP&volume=' + volume + '&article=' + page;
+        // Work-around solution for the new APS website:
+        record.website = 'http://journals.aps.org/search/?q=RMP%20' + volume + ',%20' + page;
         record.document = 'doAJAX';
         record.ajaxCall = 'php/lookup.aps?journal=RMP&volume=' + volume + '&page=' + page;
         return record;
@@ -191,6 +194,17 @@ function findRef(query) {
         record.journal = 'Chemical Review';
         record.reference = 'Chem. Rev. <b>' + volume + '</b>, ' + article;
         record.website = 'http://pubs.acs.org/action/quickLink?quickLinkJournal=chreay&quickLinkVolume=' + volume + '&quickLinkPage=' + article;
+        return record;
+    }
+
+    // Search for J. Math. Phys references
+    if (m = r_jmathphys.exec(query)) {
+        var volume = m[1];
+        var article = m[2];
+
+        record.journal = 'J. Math. Phys.';
+        record.reference = 'J. Math. Phys. <b>' + volume + '</b>, ' + article;
+        record.website = 'http://scitation.aip.org/search?noRedirect=true&value8=Journal+of+Mathematical+Physics&option8=journalbooktitle&operator12=AND&option12=resultCategory&value12=ResearchPublicationContent&operator13=AND&option14=elocationpage&option13=prism_volume&operator14=AND&value13=' + volume + '&value14=' + article;
         return record;
     }
 

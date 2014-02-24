@@ -59,6 +59,9 @@ GLOBAL.testQueries = [
     'New Journal of Physics 13, 093040 (2011).',
     'Reports on Progress in Physics 72, 126401 (2009).',
 
+    // Journal of Mathematical Physics
+    'J. Math. Phys. 14 , 701 (1973)',
+
     // '[1] M. Aidelsburger, M. Atala, S. Nascimbène, S. Trotzky, Y. -a. Chen, and I. Bloch, Phys. Rev. Lett. 107, 255301 (2011).',
     // '[2] K. Aikawa, A. Frisch, M. Mark, S. Baier, A. Rietzler, R. Grimm, and F. Ferlaino, Phys. Rev. Lett. 108, 210401 (2012).',
     // '[3] M. Baranov, K. Osterloh, and M. Lewenstein, Phys. Rev. Lett. 94, 070404 (2005).',

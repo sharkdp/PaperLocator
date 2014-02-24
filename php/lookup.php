@@ -1,8 +1,22 @@
 <?php
-function get_data($url) {
+function get_data($url, $post = false) {
     $ch = curl_init();
     $timeout = 5;
-    curl_setopt($ch, CURLOPT_URL, $url);
+    if ($post == true) {
+        $parts = parse_url($url);
+
+        $scheme   = isset($parts['scheme']) ? $parts['scheme'] . '://' : '';
+        $host     = isset($parts['host']) ? $parts['host'] : '';
+        $path     = isset($parts['path']) ? $parts['path'] : '';
+        $newurl = "$scheme$host$path";
+
+        curl_setopt($ch, CURLOPT_URL, $newurl);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $parts["query"]);
+    }
+    else {
+        curl_setopt($ch, CURLOPT_URL, $url);
+    }
     curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0)");
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST,false);
