@@ -17,7 +17,7 @@ describe("showDocument", function () {
 
         runs(function() {
             expect(redirectURL)
-                .toEqual('http://prl.aps.org/pdf/PRL/v17/i22/p1133_1');
+                .toEqual('http://journals.aps.org/prl/pdf/10.1103/PhysRevLett.17.1133' to equal 'http://prl.aps.org/pdf/PRL/v17/i22/p1133_1');
         });
     });
 });
