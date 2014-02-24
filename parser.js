@@ -84,7 +84,7 @@ function findRef(query) {
         // Work-around solution for the new APS website:
         record.website = 'http://journals.aps.org/search/?q=RMP%20' + volume + ',%20' + page;
         record.document = 'doAJAX';
-        record.ajaxCall = 'php/lookup.aps?journal=RMP&volume=' + volume + '&page=' + page;
+        record.ajaxCall = 'php/lookup_aps.php?journal=RMP&volume=' + volume + '&page=' + page;
         return record;
     }
 
