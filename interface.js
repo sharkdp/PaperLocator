@@ -58,6 +58,7 @@ function lookup() {
 
     if (query !== lastQuery) {
         lastQuery = query;
+        localStorage["lastQuery"] = lastQuery;
         lastRecord = findRef(query);
 
         if (lastRecord.journal != "" && lastRecord.reference != "") {
@@ -167,4 +168,14 @@ $(document).ready(function() {
     // Do initial lookup, in case back-button has been used
     // and query field is already filled
     lookup();
+
+    // Get last query from local storage
+    lastQuery = localStorage["lastQuery"];
+    if ((typeof lastQuery == 'string' || lastQuery instanceof String)
+            && $query.val() === "") {
+        $query.val(lastQuery);
+    }
+
+    // Select the text in the input field
+    $query.select();
 });

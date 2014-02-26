@@ -3,7 +3,7 @@
 
   "name": "Paper locator",
   "description": "Paper locator is an easy and universal interface to get immediate access to scientific papers.",
-  "version": "0.4.7",
+  "version": "0.4.8",
 
   "permissions": ["tabs", "http://paperlocator.com/"],
   "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",

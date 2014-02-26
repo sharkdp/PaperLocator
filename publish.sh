@@ -15,6 +15,8 @@ cp pl.css parser.min.js interface.min.js firefox/pl
 # update CLI version
 cp parser.min.js cli
 
-# merge differences in html files
-diffuse index.html chrome/pl/index.html
-diffuse index.html firefox/pl/index.html
+# merge differences in html files (unless no-diff option is set -nd)
+if [ x"$1" != x"-nd" ]; then
+    diffuse index.html chrome/pl/index.html
+    diffuse index.html firefox/pl/index.html
+fi
