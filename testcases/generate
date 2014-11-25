@@ -1,5 +1,5 @@
 cp output.js output.old.js
 
-nodejs generate.js > output.js
+node generate.js > output.js
 
 diff output.old.js output.js

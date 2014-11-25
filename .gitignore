@@ -7,3 +7,4 @@ chrome/pl.zip
 testcases/output.js
 testcases/output.old.js
 testcases/coverage
+node_modules
