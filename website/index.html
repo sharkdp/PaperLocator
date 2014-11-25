@@ -6,9 +6,9 @@
         <title>Paper locator</title>
         <link rel="stylesheet" type="text/css" href="pl.css" />
         <link rel="icon" type="image/x-icon" href="favicon.ico" />
-        <script type="text/javascript" src="jquery-2.0.3.min.js"></script>
-        <script type="text/javascript" src="parser.min.js"></script>
-        <script type="text/javascript" src="interface.min.js"></script>
+        <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="js/parser.js"></script>
+        <script type="text/javascript" src="js/interface.js"></script>
     </head>
     <body>
         <div id="notification"></div>
@@ -29,7 +29,7 @@
                     <p><b>Try one of the following:</b></p>
                     <pre>[1] R. B. Laughlin, Phys. Rev. Lett. 50, 1395 (1983).<br />prl 17 1133<br />arXiv:quant-ph/9707021<br />lained in Nature Physics 1, 23 by Imm</pre>
 
-                    <p>Install one of the <a href="javascript:void(0);" onclick="javascript:toggleInfoBox('#extensions');">browser extensions</a> for the fastest experience.</p>
+                    <p>Install the <a href="javascript:void(0);" onclick="javascript:toggleInfoBox('#extensions');">browser extension</a> for the fastest experience.</p>
 
                     <p class="supported">
                         <b>Supported references <i>so far</i>:</b> Nature (Physics), Science, PRA-PRX, Phys. Rev. Lett., Rev. Mod. Phys, New Journal of Physics, Journal of Physics, Rep. Prog. Phys., Chemical Reviews, Digital object identifiers (DOI), arXiv
@@ -40,11 +40,6 @@
                     <p class="instr">Get the Chrome extension</p>
                     The extension for Google Chrome is available in the official <a href="https://chrome.google.com/webstore/detail/paper-locator/cgkkfhillddpphcahkcjhkjjkgenbgje">Chrome Web Store</a>.<br /><br />
                     A small icon will appear next to your address bar.
-                    <br /><br /><br />
-                    <a href="firefox/paper-locator.xpi"><img src="graphics/firefox.png" alt="Firefox" /></a>
-                    <p class="instr">Get the Firefox extension</p>
-                    The browser plugin for Mozilla Firefox can be installed directly by clicking <a href="firefox/paper-locator.xpi">here</a>.<br /><br />
-                    You might need to enable the <i>Add-on bar</i> through the <i>View / Toolbars</i> menu.
                 </div>
                 <div id="github" class="infobox">
                     <a href="https://github.com/sharkdp/PaperLocator"><img src="graphics/github.png" alt="GitHub" /></a>
@@ -66,7 +61,7 @@
             </div>
             <div id="footer">
                 <div id="helpButton">Getting started</div> &#183;
-                <div id="extensionsButton">Browser extensions</div> &#183;
+                <div id="extensionsButton">Browser extension</div> &#183;
                 <div id="githubButton">Development</div> &#183;
                 <div id="feedbackButton">Feedback</div>
             </div>

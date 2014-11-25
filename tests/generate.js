@@ -2,7 +2,7 @@ require("./input.js");
 
 var fs = require('fs');
 
-eval(fs.readFileSync('../parser.js')+'');
+eval(fs.readFileSync('../js/parser.js')+'');
 
 var out = 'var testCases = [\n';
 var i;
@@ -16,8 +16,7 @@ for (i = 0; i < testQueries.length; i++) {
     if (i !== 0) {
         out += ',\n\n';
     }
-    // out = out + '    ["' + encodeURIComponent(query) +
-    //             '", "' + encodeURIComponent(record.reference) + '"]';
+
     query = query.replace(/"/g, '\\"');
     out = out + '    ["' + query + '",\n' +
                 '     "' + record.reference + '"]';

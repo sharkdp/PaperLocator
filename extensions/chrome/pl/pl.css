@@ -1,4 +1,4 @@
-#wrapper {
+#testswrapper {
     width: 100%;
     margin: auto;
     min-height: 100%;
@@ -69,7 +69,7 @@ input {
 #logo {
     width: 100%;
     height: 55px;
-    background-image: url(./pl.png);
+    background-image: url(graphics/pl.png);
     background-repeat: no-repeat;
     background-position: center;
     margin-bottom: 10px;

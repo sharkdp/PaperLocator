@@ -1,10 +1,8 @@
-compile.sh
-compiler.jar
-parser.min.js
-interface.min.js
-chrome/pack.sh
-chrome/pl.zip
-testcases/output.js
-testcases/output.old.js
-testcases/coverage
+dist
+extensions/chrome/pack.sh
+extensions/chrome/pl.zip
+extensions/*/pl/*.min.js
+tests/output.js
+tests/output.old.js
+tests/coverage
 node_modules

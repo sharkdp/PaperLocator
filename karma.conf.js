@@ -11,15 +11,12 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      // 'jquery-2.0.3.min.js',
-      // 'pl.js',
-      'testcases/output.js',
-      'parser.js',
-      'testcases/parser.test.js'
+      'tests/output.js',
+      'js/parser.js',
+      'tests/parser.test.js'
     ],
 
     preprocessors: {
-        'pl.js': ['coverage'],
         'parser.js': ['coverage']
     },
 
@@ -32,7 +29,7 @@ module.exports = function(config) {
 
     coverageReporter: {
         type: 'html',
-        dir: 'testcases/coverage/'
+        dir: 'tests/coverage/'
     },
 
     // web server port
