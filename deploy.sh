@@ -10,7 +10,7 @@ mkdir "$p/js"
 
 # copy all assets
 cp -r website/* "$p"
-cp js/jquery-*.js "$p/js/"
+cp js/*.js "$p/js/"
 cp -r tests/ "$p"
 cp -r extensions/ "$p"
 cp -r php/ "$p"

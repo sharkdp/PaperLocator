@@ -59,15 +59,15 @@ function sendFeedback() {
     });
 }
 
-function lookup() {
+function lookup(initial) {
     var query = $("#query").val();
 
-    if (query !== lastQuery) {
+    if (query !== lastQuery || initial) {
         lastQuery = query;
         localStorage.lastQuery = lastQuery;
         lastRecord = findRef(query);
 
-        if (lastRecord.journal !== "" && lastRecord.reference !== "") {
+        if (lastRecord.journal !== "" && lastRecord.reference !== "" && initial !== true) {
             notify('Detected <i>' + lastRecord.journal + '</i> reference:<br><div id="reference">' + lastRecord.reference + '</div>');
         }
     }
@@ -171,10 +171,6 @@ $(document).ready(function() {
         }
     }
 
-    // Do initial lookup, in case back-button has been used
-    // and query field is already filled
-    lookup();
-
     // Get last query from local storage
     lastQuery = localStorage.lastQuery;
     if ((typeof lastQuery === 'string' || lastQuery instanceof String)
@@ -185,4 +181,8 @@ $(document).ready(function() {
 
     // Select the text in the input field
     $query.select();
+
+    // Do initial lookup, in case back-button has been used
+    // and query field is already filled
+    lookup(true);
 });
