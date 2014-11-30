@@ -1,7 +1,7 @@
 Paper locator
 =============
 
-[__Paper locator__](http://paperlocator.com) is an easy and universal interface to get immediate access to scientific papers.
+Paper locator is an easy and universal interface to get immediate access to scientific papers.
 
 Paste a text sample that contains a reference or citation and Paper locator will try to redirect you immediately to the abstract (click journal website) or the document (press enter).
 
