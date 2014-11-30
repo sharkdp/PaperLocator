@@ -1,3 +1,9 @@
+/*jslint vars:true, nomen: true, white: true, browser: true*/
+/*global $*/
+/*global findRef*/
+
+'use strict';
+
 var lastRecord = {journal: '', reference: '', website: '', document: ''};
 var lastMessage = "";
 var lastQuery = "";
@@ -44,7 +50,7 @@ function sendFeedback() {
             message: $("#feedbackMessage").val()
         },
         type: 'POST'
-    }).success(function(data) {
+    }).success(function() {
         $("#feedback").html('<p class="instr">Feedback sent</p><p>Thank you!</p>');
         $("body, #submitDocument").css("cursor", "default");
     }).error(function () {
@@ -58,13 +64,18 @@ function lookup() {
 
     if (query !== lastQuery) {
         lastQuery = query;
-        localStorage["lastQuery"] = lastQuery;
+        localStorage.lastQuery = lastQuery;
         lastRecord = findRef(query);
 
-        if (lastRecord.journal != "" && lastRecord.reference != "") {
+        if (lastRecord.journal !== "" && lastRecord.reference !== "") {
             notify('Detected <i>' + lastRecord.journal + '</i> reference:<br><div id="reference">' + lastRecord.reference + '</div>');
         }
     }
+}
+
+function openURL(url) {
+    // Use seperate function to support browser extensions
+    location.href = url;
 }
 
 function journalWebsite() {
@@ -82,7 +93,7 @@ function showDocument() {
                 url: 'http://paperlocator.com/' + lastRecord.ajaxCall,
                 type: 'GET'
             }).success(function(data) {
-                if ($.trim(data) != '') {
+                if ($.trim(data) !== '') {
                     $("body, #submitDocument").css("cursor", "default");
                     openURL(data);
                 }
@@ -104,11 +115,6 @@ function showDocument() {
     else if (lastRecord.website !== '') {
         openURL(lastRecord.website);
     }
-}
-
-function openURL(url) {
-    // Use seperate function to support browser extensions
-    location.href = url;
 }
 
 $(document).ready(function() {
@@ -147,12 +153,12 @@ $(document).ready(function() {
 
         // See if cookie is present
         var cookiePresent = false;
-        if (navigator.cookieEnabled && document.cookie.indexOf("showIntro=false") != -1) {
+        if (navigator.cookieEnabled && document.cookie.indexOf("showIntro=false") !== -1) {
             cookiePresent = true;
         }
 
         // Show help infobox if hash #intro is set or no cookie is present
-        if (!cookiePresent || window.location.hash == '#intro') {
+        if (!cookiePresent || window.location.hash === '#intro') {
             $("#help").delay(500).slideDown();
         }
 
@@ -170,8 +176,9 @@ $(document).ready(function() {
     lookup();
 
     // Get last query from local storage
-    lastQuery = localStorage["lastQuery"];
-    if ((typeof lastQuery == 'string' || lastQuery instanceof String)
+    lastQuery = localStorage.lastQuery;
+    if ((typeof lastQuery === 'string' || lastQuery instanceof String)
+            && lastQuery !== 'undefined'
             && $query.val() === "") {
         $query.val(lastQuery);
     }
