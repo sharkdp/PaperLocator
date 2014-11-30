@@ -5,7 +5,7 @@ Paper locator
 
 Paste a text sample that contains a reference or citation and Paper locator will try to redirect you immediately to the abstract (click journal website) or the document (press enter).
 
-This automates the whole process of manually extracting *journal*, *issue* and *page number* from a given reference and searching the publisher websites manually,
+This automates the whole process of extracting *journal*, *issue* and *page number* from a given reference and searching the publisher websites manually.
 
 __Try one of the following on__ [paperlocator.com](http://paperlocator.com):
 ```
