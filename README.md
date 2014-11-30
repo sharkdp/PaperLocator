@@ -3,12 +3,14 @@ Paper locator
 
 [__Paper locator__](http://paperlocator.com) is an easy and universal interface to get immediate access to scientific papers.
 
-Tired of manually extracting *journal*, *volume* and *page* from a reference and searching the publisher websites manually? Paper locator automates this process. Just copy a text sample containing the reference and select if you want to see the abstract (journal website) or the document directly (press enter).
+Paste a text sample that contains a reference or citation and Paper locator will try to redirect you immediately to the abstract (click journal website) or the document (press enter).
+
+This automates the whole process of manually extracting *journal*, *issue* and *page number* from a given reference and searching the publisher websites manually,
 
 __Try one of the following on__ [paperlocator.com](http://paperlocator.com):
 ```
-[1] R. B. Laughlin, Phys. Rev. Lett. 50, 1395 (1983).
-prl 17 1133
+[1] Peter W. Higgs, Phys. Rev. Lett. 13, 508 (1964).
+prl 13 508
 arXiv:quant-ph/9707021
 lained in Nature Physics 1, 23 by Imm
 ```
