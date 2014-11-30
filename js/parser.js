@@ -101,7 +101,7 @@ function constructJournals() {
 
     // Search for arXiv ID
     var r_arXiv = new RegExp('\\barXiv:([0-9]{4,}\\.[0-9]{4,}(?:v[0-9]+)?)\\b', 'ig');
-    var r_arXiv_old = new RegExp('\\barXiv:? *(?:[a-z)]* )? *((?:[a-z-]+)/[0-9]+(?:v[0-9]+)?)\\b', 'ig');
+    var r_arXiv_old = new RegExp('\\barXiv: *(?:[a-z)]* )? *((?:[a-z-]+)/[0-9]+(?:v[0-9]+)?)\\b', 'ig');
     journals.push(
         new Journal(
             [r_arXiv, r_arXiv_old],
@@ -303,4 +303,9 @@ function findRef(query) {
 
     // Found nothing -> redirect to Google scholar
     return makeRecord('', '', 'http://paperlocator.com/php/redirect.php?q=' + encodeURI(query));
+}
+
+// Export findRef for Node
+if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+    module.exports.findRef = findRef;
 }

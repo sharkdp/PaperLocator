@@ -1,18 +1,20 @@
+/*global testQueries*/
+
+'use strict';
+
 require("./input.js");
+var parser = require("../js/parser.js");
 
-var fs = require('fs');
-
-eval(fs.readFileSync('../js/parser.js')+'');
-
-var out = 'var testCases = [\n';
 var i;
 var query;
 var record;
+var out = 'var testCases = [\n';
 
-for (i = 0; i < testQueries.length; i++) {
+
+for (i = 0; i < testQueries.length; i += 1) {
     query = testQueries[i];
 
-    record = findRef(query);
+    record = parser.findRef(query);
     if (i !== 0) {
         out += ',\n\n';
     }
@@ -23,6 +25,6 @@ for (i = 0; i < testQueries.length; i++) {
 
 }
 
-var out = out + '\n];';
+out = out + '\n];';
 console.log(out);
 
