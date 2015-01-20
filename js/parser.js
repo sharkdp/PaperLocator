@@ -76,11 +76,11 @@ function simpleJournal(pattern, journal, reference, website, doc, ajaxCall) {
     var regex = buildJournalRegExp(pattern);
 
     var callback = function(issue, page) {
-        reference = replaceIssuePage(reference, issue, page);
-        website   = replaceIssuePage(website,   issue, page);
-        doc       = replaceIssuePage(doc,       issue, page);
-        ajaxCall  = replaceIssuePage(ajaxCall,  issue, page);
-        return makeRecord(journal, reference, website, doc, ajaxCall);
+        var nreference = replaceIssuePage(reference, issue, page);
+        var nwebsite   = replaceIssuePage(website,   issue, page);
+        var ndoc       = replaceIssuePage(doc,       issue, page);
+        var najaxCall  = replaceIssuePage(ajaxCall,  issue, page);
+        return makeRecord(journal, nreference, nwebsite, ndoc, najaxCall);
     };
 
     return new Journal(regex, callback);
