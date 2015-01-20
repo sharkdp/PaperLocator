@@ -66,6 +66,10 @@ GLOBAL.testQueries = [
     'Nature Comm. 4 2287',
     'Nat. Commun. 4, 2230',
 
+    // Journal of Modern Optics
+    'J. Mod. Opt. 60, 1519 (2013)',
+    'Journal of Modern Optics 49, 2325',
+
     // '[1] M. Aidelsburger, M. Atala, S. Nascimbène, S. Trotzky, Y. -a. Chen, and I. Bloch, Phys. Rev. Lett. 107, 255301 (2011).',
     // '[2] K. Aikawa, A. Frisch, M. Mark, S. Baier, A. Rietzler, R. Grimm, and F. Ferlaino, Phys. Rev. Lett. 108, 210401 (2012).',
     // '[3] M. Baranov, K. Osterloh, and M. Lewenstein, Phys. Rev. Lett. 94, 070404 (2005).',
