@@ -1,4 +1,4 @@
-#testswrapper {
+#wrapper {
     width: 100%;
     margin: auto;
     min-height: 100%;
@@ -51,7 +51,7 @@ input {
     position: absolute;
     right: 50px;
     top: 50px;
-    width: 250px;
+    width: 260px;
     height: 46px;
     padding: 10px;
     background-color: #333;
