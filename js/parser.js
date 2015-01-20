@@ -217,6 +217,16 @@ function constructJournals() {
         )
     );
 
+    // J. Mod. Opt
+    journals.push(
+        simpleJournal(
+            'J<ournal> <of> M<od<ern>> Opt<ics>',
+            'J. Mod. Opt',
+            'J. Mod. Opt. <b>{issue}</b>, {page}',
+            'http://www.tandfonline.com/action/quickLink?quickLink=true&quickLinkJournal=tmop20&quickLinkVolume={issue}&quickLinkIssue=&quickLinkPage={page}'
+        )
+    );
+
     // IOP: Journal of Physics X, New Journal of Physics, Reports on Progress in Physics
     var r_jphys = buildJournalRegExp('J<ournal> <of> P<hys<ics>> ([ABDG]|C<ond<ens<ed>>> <Mat<ter>>)');
     var r_njp = buildJournalRegExp('(N)<ew> J<our<nal>> <of> P<hys<ics>>');
