@@ -157,7 +157,7 @@ function constructJournals() {
     // Nature
     journals.push(
         new Journal(
-            buildJournalRegExp('(Nat<ure> <Phys<ics>>)'),
+            buildJournalRegExp('Nat<ure> (<Phys<ics>>|Comm<un<ications?>>)'),
             function(journal, volume, page) {
                 var param = '';
                 var arg = '';
@@ -165,6 +165,10 @@ function constructJournals() {
                     journal = 'Phys. ';
                     param = 'nphys&sp-q-9%5BNPHYS%5D';
                     arg = 'nphys';
+                } else if (journal !== undefined && journal.search(/comm/i) !== -1) {
+                    journal = 'Comm. ';
+                    param = 'ncomms&sp-q-9%5BNCOMMS%5D';
+                    arg = 'ncomms';
                 } else {
                     journal = '';
                     param = 'default';
