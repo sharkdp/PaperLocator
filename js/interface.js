@@ -171,12 +171,19 @@ $(document).ready(function() {
         }
     }
 
-    // Get last query from local storage
-    lastQuery = localStorage.lastQuery;
-    if ((typeof lastQuery === 'string' || lastQuery instanceof String)
-            && lastQuery !== 'undefined'
-            && $query.val() === "") {
-        $query.val(lastQuery);
+    // Read query from URL /index.html?PRL...
+    var locationQuery = window.location.search.substring(1);
+    if (locationQuery.length > 0) {
+        $query.val(decodeURIComponent(locationQuery));
+    }
+    else {
+        // Get last query from local storage
+        lastQuery = localStorage.lastQuery;
+        if ((typeof lastQuery === 'string' || lastQuery instanceof String)
+                && lastQuery !== 'undefined'
+                && $query.val() === "") {
+            $query.val(lastQuery);
+        }
     }
 
     // Select the text in the input field
