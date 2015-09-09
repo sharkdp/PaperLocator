@@ -192,4 +192,9 @@ $(document).ready(function() {
     // Do initial lookup, in case back-button has been used
     // and query field is already filled
     lookup(true);
+
+    // Try to redirect if a location query has been used
+    if (locationQuery.length > 0) {
+        showDocument();
+    }
 });
