@@ -7,7 +7,7 @@ Paste a text sample that contains a reference or citation and Paper locator will
 
 This automates the whole process of extracting *journal*, *issue* and *page number* from a given reference and searching the publisher websites manually.
 
-__Try one of the following on__ [paperlocator.com](http://paperlocator.com):
+__Try one of the following on__ [http://david-peter.de/paperlocator/](http://david-peter.de/paperlocator/):
 ```
 [1] Peter W. Higgs, Phys. Rev. Lett. 13, 508 (1964).
 prl 13 508
