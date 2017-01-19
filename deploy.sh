@@ -19,8 +19,8 @@ if [[ $1 == "--fast" ]]; then
     cp js/parser.js js/interface.js "$p/js/"
 else
     # Minify JS files with Googles closure compiler
-    closure --js js/parser.js    --js_output_file "$p/js/parser.min.js"
-    closure --js js/interface.js --js_output_file "$p/js/interface.min.js"
+    closure-compiler --js js/parser.js    --js_output_file "$p/js/parser.min.js"
+    closure-compiler --js js/interface.js --js_output_file "$p/js/interface.min.js"
 
     # replace js files by minified versions
     sed -i 's/parser\.js/parser.min.js/g' "$p/index.html"
