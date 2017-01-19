@@ -43,7 +43,7 @@ function toggleInfoBox(id) {
 function sendFeedback() {
     $("body, #submitDocument").css("cursor", "progress");
     $.ajax({
-        url: 'http://paperlocator.com/php/feedback.php',
+        url: 'http://david-peter.de/paperlocator/php/feedback.php',
         data: {
             name: $("#feedbackName").val(),
             email: $("#feedbackEmail").val(),
@@ -90,7 +90,7 @@ function showDocument() {
             // Lookup PDF URL
             $("body, #submitDocument").css("cursor", "progress");
             $.ajax({
-                url: 'http://paperlocator.com/' + lastRecord.ajaxCall,
+                url: 'http://david-peter.de/paperlocator/' + lastRecord.ajaxCall,
                 type: 'GET'
             }).success(function(data) {
                 if ($.trim(data) !== '') {

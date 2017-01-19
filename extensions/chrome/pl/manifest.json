@@ -5,7 +5,7 @@
   "description": "Paper locator is an easy and universal interface to get immediate access to scientific papers.",
   "version": "0.5",
 
-  "permissions": ["tabs", "http://paperlocator.com/"],
+  "permissions": ["tabs", "http://david-peter.de/paperlocator/"],
   "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
   "icons": { "48": "icon_48.png",
             "128": "icon_128.png"},

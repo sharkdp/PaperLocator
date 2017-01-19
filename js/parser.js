@@ -316,7 +316,7 @@ function findRef(query) {
     }
 
     // Found nothing -> redirect to Google scholar
-    return makeRecord('', '', 'http://paperlocator.com/php/redirect.php?q=' + encodeURI(query));
+    return makeRecord('', '', 'http://david-peter.de/paperlocator/php/redirect.php?q=' + encodeURI(query));
 }
 
 // Export findRef for Node

@@ -18,7 +18,7 @@ describe("findRef", function () {
 
     it("should point to Scholar if no ref was found", function () {
         expect(findRef("No reference here").website)
-            .toEqual('http://paperlocator.com/php/redirect.php?q=No%20reference%20here');
+            .toEqual('http://david-peter.de/paperlocator/php/redirect.php?q=No%20reference%20here');
     });
 });
 
